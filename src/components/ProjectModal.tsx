@@ -11,6 +11,20 @@ import {
   LinkIcon,
   CodeBracketIcon,
 } from "@heroicons/react/24/solid";
+import {
+  InformationCircleIcon,
+  CalendarDaysIcon,
+  // UserCircleIcon,
+  CpuChipIcon,
+  ListBulletIcon,
+  BeakerIcon,
+  TrophyIcon,
+  UsersIcon,
+  CheckCircleIcon,
+  CloudArrowUpIcon,
+  LightBulbIcon,
+  RectangleGroupIcon,
+} from "@heroicons/react/24/outline";
 import { Project } from "../types/project";
 
 // react-slick CSS 임포트
@@ -81,52 +95,59 @@ export default function ProjectModal({ isOpen, closeModal, project }: ProjectMod
     dotsClass: "slick-dots custom-dots",
   };
 
-  const renderSection = (title: string, content: React.ReactNode, secondary = false) => (
-    <div className='mb-8'>
-      <h3
-        className={`text-xl font-semibold mb-4 font-sans ${secondary ? "text-slate-700 dark:text-slate-300" : "text-slate-800 dark:text-slate-200"}`}>
-        {title}
-      </h3>
-      {content}
+  const renderSection = (title: string, Icon: React.ElementType, content: React.ReactNode) => (
+    <div className='mb-10'>
+      <div className='flex items-center mb-4'>
+        <Icon className='w-6 h-6 mr-2 text-slate-500 dark:text-slate-400 flex-shrink-0' />
+        <h3 className='text-xl font-semibold text-slate-800 dark:text-slate-200 font-sans'>
+          {title}
+        </h3>
+      </div>
+      <div className='pl-8'>{content}</div>
     </div>
   );
 
-  const renderList = (items: string[], style: "disc" | "none" = "disc") => (
-    <ul
-      className={`${style === "disc" ? "list-disc list-outside pl-5" : ""} space-y-2 text-slate-700 dark:text-slate-300 text-sm md:text-base`}>
-      {items.map((item, index) => (
-        <li key={index}>{item}</li>
-      ))}
-    </ul>
-  );
-
-  const renderKeyValueList = (items: { [key: string]: string }[] | undefined) => {
-    if (!items) return null;
-
+  const renderList = (items: string[] | undefined, style: "disc" | "none" = "disc") => {
+    if (!items || items.length === 0) return null;
     return (
-      <ul className='space-y-4 text-sm md:text-base'>
+      <ul
+        className={`${style === "disc" ? "list-disc list-outside pl-5" : ""} space-y-2 text-slate-600 dark:text-slate-400 text-sm md:text-base`}>
+        {items.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
+    );
+  };
+
+  const renderKeyValueList = (items: { [key: string]: string; title?: string }[] | undefined) => {
+    if (!items || items.length === 0) return null;
+    return (
+      <ul className='space-y-5'>
         {items.map((item, index) => {
-          const key = Object.keys(item)[0];
-          const value = item[key];
-          const secondKey = Object.keys(item)[1];
-          const secondValue = item[secondKey];
+          let key: string | undefined = item.title;
+          if (!key) {
+            const foundKey = Object.keys(item).find(
+              (k) => k !== "detail" && k !== "solution" && k !== "title"
+            );
+            key = foundKey ? foundKey.charAt(0).toUpperCase() + foundKey.slice(1) : "Detail";
+          } else {
+            key = key.charAt(0).toUpperCase() + key.slice(1);
+          }
+
+          const value =
+            item.detail ||
+            item.solution ||
+            item[Object.keys(item).find((k) => k !== "title") || ""] ||
+            "No details provided.";
 
           return (
             <li key={index}>
-              {key && (
-                <p className='font-semibold text-slate-800 dark:text-slate-200 mb-1'>
-                  {item.title || key.charAt(0).toUpperCase() + key.slice(1)}:
-                </p>
-              )}
-              {value && <p className='text-slate-700 dark:text-slate-300 mb-2 ml-2'>{value}</p>}
-              {secondKey && (
-                <p className='font-semibold text-slate-800 dark:text-slate-200 mb-1'>
-                  {secondKey.charAt(0).toUpperCase() + secondKey.slice(1)}:
-                </p>
-              )}
-              {secondValue && (
-                <p className='text-slate-700 dark:text-slate-300 ml-2'>{secondValue}</p>
-              )}
+              <p className='font-semibold text-slate-700 dark:text-slate-300 mb-1 text-base'>
+                {key}:
+              </p>
+              <p className='text-slate-600 dark:text-slate-400 text-sm md:text-base ml-1'>
+                {value}
+              </p>
             </li>
           );
         })}
@@ -167,7 +188,7 @@ export default function ProjectModal({ isOpen, closeModal, project }: ProjectMod
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 50, opacity: 0 }}
               transition={{ type: "spring", stiffness: 200, damping: 25 }}
-              className='bg-white dark:bg-navy rounded-lg shadow-xl max-w-5xl w-full max-h-[90vh] flex flex-col overflow-hidden'
+              className='bg-white dark:bg-navy-darker rounded-lg shadow-xl max-w-5xl w-full max-h-[90vh] flex flex-col overflow-hidden'
               onClick={(e) => e.stopPropagation()}>
               <div className='flex items-center justify-between p-5 md:p-6 border-b border-slate-200 dark:border-navy-light flex-shrink-0'>
                 <h2 className='text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-100 font-sans'>
@@ -181,14 +202,14 @@ export default function ProjectModal({ isOpen, closeModal, project }: ProjectMod
                 </button>
               </div>
 
-              <div className='flex-1 overflow-y-auto p-5 md:p-8 project-modal-body'>
-                <div className='mb-10 relative project-slider-container'>
+              <div className='flex-1 overflow-y-auto p-6 md:p-10 project-modal-body bg-slate-50 dark:bg-navy'>
+                <div className='mb-10 relative project-slider-container rounded-lg overflow-hidden shadow-md'>
                   {project.imageUrls && project.imageUrls.length > 0 ? (
                     <Slider {...settings}>
                       {project.imageUrls.map((imgUrl, index) => (
                         <div
                           key={index}
-                          className='relative aspect-video bg-slate-100 dark:bg-navy-light rounded-md overflow-hidden max-h-[60vh]'>
+                          className='relative bg-slate-200 dark:bg-navy-light max-h-[50vh]'>
                           <Image
                             src={imgUrl}
                             alt={`${project.title} screenshot ${index + 1}`}
@@ -206,116 +227,143 @@ export default function ProjectModal({ isOpen, closeModal, project }: ProjectMod
                   )}
                 </div>
 
-                {renderSection(
-                  "Project Overview",
-                  <>
-                    {project.projectGoal && (
-                      <p className='text-slate-700 dark:text-slate-300 mb-3 text-sm md:text-base'>
-                        {project.projectGoal}
-                      </p>
-                    )}
-                    {project.coreValue && (
-                      <p className='text-slate-700 dark:text-slate-300 text-sm md:text-base'>{`Core Value: ${project.coreValue}`}</p>
-                    )}
-                    {!project.projectGoal && !project.coreValue && project.description && (
-                      <p className='text-slate-700 dark:text-slate-300 text-sm md:text-base'>
-                        {project.description}
-                      </p>
-                    )}
-                  </>
-                )}
-
-                {renderSection(
-                  "Timeline & Your Role",
-                  <>
-                    {project.date && (
-                      <p className='font-semibold text-slate-800 dark:text-slate-200 mb-1 text-sm md:text-base'>{`Timeline: ${project.date}`}</p>
-                    )}
-                    {project.yourRole && project.yourRole.length > 0 && (
-                      <div className='mt-3'>
-                        <p className='font-semibold text-slate-800 dark:text-slate-200 mb-1 text-sm md:text-base'>
-                          My Role:
-                        </p>
-                        {renderList(project.yourRole)}
-                      </div>
-                    )}
-                  </>
-                )}
-
-                {renderSection(
-                  "Tech Stack",
-                  <div className='space-y-4'>
-                    {project.technologies && project.technologies.length > 0 && (
-                      <div>
-                        <h4 className='font-semibold text-slate-700 dark:text-slate-300 mb-2 text-sm md:text-base'>
-                          Core Technologies:
-                        </h4>
-                        {renderTechList(project.technologies)}
-                      </div>
-                    )}
-                    {project.techInfra && project.techInfra.length > 0 && (
-                      <div>
-                        <h4 className='font-semibold text-slate-700 dark:text-slate-300 mb-2 text-sm md:text-base'>
-                          Infrastructure & DevOps:
-                        </h4>
-                        {renderTechList(project.techInfra)}
-                      </div>
-                    )}
-                    {project.techDbApi && project.techDbApi.length > 0 && (
-                      <div>
-                        <h4 className='font-semibold text-slate-700 dark:text-slate-300 mb-2 text-sm md:text-base'>
-                          Databases & APIs:
-                        </h4>
-                        {renderTechList(project.techDbApi)}
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {renderSection(
-                  "Key Features & Implementation",
-                  renderKeyValueList(project.keyFeatures)
-                )}
-
-                {(project.architectureDesc || project.architectureChoice) &&
+                {(project.projectGoal || project.coreValue || project.description) &&
                   renderSection(
-                    "Architecture & Design",
-                    <>
-                      {project.architectureDesc && (
-                        <p className='text-slate-700 dark:text-slate-300 mb-3 text-sm md:text-base'>
-                          {project.architectureDesc}
-                        </p>
+                    "Project Overview",
+                    InformationCircleIcon,
+                    <div className='space-y-3 text-slate-600 dark:text-slate-400 text-sm md:text-base leading-relaxed'>
+                      {project.projectGoal && <p>{project.projectGoal}</p>}
+                      {project.coreValue && <p>{project.coreValue}</p>}
+                      {!project.projectGoal && !project.coreValue && project.description && (
+                        <p>{project.description}</p>
                       )}
-                      {project.architectureChoice && (
-                        <p className='text-slate-700 dark:text-slate-300 text-sm md:text-base'>{`Design Choice: ${project.architectureChoice}`}</p>
-                      )}
-                    </>
+                    </div>
                   )}
 
-                {renderSection("Challenges & Solutions", renderKeyValueList(project.challenges))}
+                {(project.date || project.yourRole) &&
+                  renderSection(
+                    "Timeline & Role",
+                    CalendarDaysIcon,
+                    <div className='space-y-3'>
+                      {project.date && (
+                        <p className='text-sm md:text-base text-slate-600 dark:text-slate-400'>
+                          <span className='font-semibold text-slate-700 dark:text-slate-300'>
+                            Timeline:
+                          </span>{" "}
+                          {project.date}
+                        </p>
+                      )}
+                      {project.yourRole && (
+                        <div>
+                          <p className='font-semibold text-slate-700 dark:text-slate-300 mb-1 text-sm md:text-base'>
+                            Role:
+                          </p>
+                          {renderList(project.yourRole)}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                {(project.technologies || project.techInfra || project.techDbApi) &&
+                  renderSection(
+                    "Technologies Used",
+                    CpuChipIcon,
+                    <div className='space-y-4'>
+                      {project.technologies && project.technologies.length > 0 && (
+                        <div>
+                          <h4 className='font-medium text-slate-600 dark:text-slate-400 mb-2 text-sm md:text-base'>
+                            Core:
+                          </h4>
+                          {renderTechList(project.technologies)}
+                        </div>
+                      )}
+                      {project.techInfra && project.techInfra.length > 0 && (
+                        <div>
+                          <h4 className='font-medium text-slate-600 dark:text-slate-400 mb-2 text-sm md:text-base'>
+                            Infrastructure/DevOps:
+                          </h4>
+                          {renderTechList(project.techInfra)}
+                        </div>
+                      )}
+                      {project.techDbApi && project.techDbApi.length > 0 && (
+                        <div>
+                          <h4 className='font-medium text-slate-600 dark:text-slate-400 mb-2 text-sm md:text-base'>
+                            Database/APIs:
+                          </h4>
+                          {renderTechList(project.techDbApi)}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                {project.keyFeatures &&
+                  project.keyFeatures.length > 0 &&
+                  renderSection(
+                    "Key Features",
+                    ListBulletIcon,
+                    renderKeyValueList(project.keyFeatures)
+                  )}
+
+                {project.architectureDesc ||
+                  (project.architectureChoice &&
+                    renderSection(
+                      "Architecture & Design",
+                      RectangleGroupIcon,
+                      <div className='space-y-3 text-slate-600 dark:text-slate-400 text-sm md:text-base leading-relaxed'>
+                        {project.architectureDesc && <p>{project.architectureDesc}</p>}
+                        {project.architectureChoice && (
+                          <p>
+                            <span className='font-semibold text-slate-700 dark:text-slate-300'>
+                              Rationale:
+                            </span>{" "}
+                            {project.architectureChoice}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+
+                {project.challenges &&
+                  project.challenges.length > 0 &&
+                  renderSection(
+                    "Challenges & Solutions",
+                    BeakerIcon,
+                    renderKeyValueList(project.challenges)
+                  )}
 
                 {project.achievements &&
                   project.achievements.length > 0 &&
-                  renderSection("Achievements & Metrics", renderList(project.achievements))}
+                  renderSection("Achievements", TrophyIcon, renderList(project.achievements))}
 
                 {project.collaboration &&
                   project.collaboration.length > 0 &&
-                  renderSection("Collaboration & Workflow", renderList(project.collaboration))}
+                  renderSection(
+                    "Collaboration & Workflow",
+                    UsersIcon,
+                    renderList(project.collaboration)
+                  )}
 
                 {project.testing &&
                   project.testing.length > 0 &&
-                  renderSection("Testing & QA", renderList(project.testing))}
+                  renderSection("Testing & QA", CheckCircleIcon, renderList(project.testing))}
 
                 {project.deployment &&
                   project.deployment.length > 0 &&
-                  renderSection("Deployment & Monitoring", renderList(project.deployment))}
+                  renderSection(
+                    "Deployment & Monitoring",
+                    CloudArrowUpIcon,
+                    renderList(project.deployment)
+                  )}
 
                 {project.lessonsLearned &&
                   project.lessonsLearned.length > 0 &&
-                  renderSection("Lessons Learned", renderList(project.lessonsLearned))}
+                  renderSection(
+                    "Lessons Learned",
+                    LightBulbIcon,
+                    renderList(project.lessonsLearned)
+                  )}
               </div>
 
-              <div className='flex items-center justify-end gap-4 p-5 md:p-6 border-t border-slate-200 dark:border-navy-light bg-slate-50 dark:bg-navy-light/30 flex-shrink-0'>
+              <div className='flex items-center justify-end gap-4 p-5 md:p-6 border-t border-slate-200 dark:border-navy-light bg-slate-100 dark:bg-navy-light/20 flex-shrink-0'>
                 {project.githubUrl && (
                   <a
                     href={project.githubUrl}

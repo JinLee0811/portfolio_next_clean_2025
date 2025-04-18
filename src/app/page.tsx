@@ -80,162 +80,161 @@ export default function Home() {
   };
 
   return (
-    <div className={clsx("min-h-screen", isDarkMode ? "bg-navy-dark" : "bg-white")}>
+    <div
+      className={clsx(
+        "min-h-screen flex flex-col lg:flex-row",
+        isDarkMode ? "bg-navy-dark" : "bg-white"
+      )}>
       <MouseFollower />
-      <Sidebar
-        isDarkMode={isDarkMode}
-        toggleDarkMode={toggleDarkMode}
-        activeSection={activeSection}
-      />
+      <div className='w-full lg:w-1/2 min-h-screen'>
+        <Sidebar
+          isDarkMode={isDarkMode}
+          toggleDarkMode={toggleDarkMode}
+          activeSection={activeSection}
+        />
+      </div>
 
-      <main className='ml-[40vw] min-h-screen w-[60vw]'>
-        {/* Hero Section */}
-        <section id='about' className='min-h-screen flex flex-col justify-center px-16 lg:px-24'>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className='space-y-6'>
-            <h2 className='font-mono text-green-600 dark:text-green-400 text-sm mb-4'>
-              01. About Me
-            </h2>
-            <div className='space-y-5 max-w-2xl'>
-              <p className='text-slate-700 dark:text-slate-300 text-base leading-relaxed group hover:bg-slate-100 dark:hover:bg-navy-light/10 p-3 rounded-lg transition-colors'>
-                I&apos;m a{" "}
-                <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                  full-stack engineer
-                </span>{" "}
-                based in Sydney with a passion for building{" "}
-                <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                  intuitive, AI-powered digital products
-                </span>
-                . I specialize in{" "}
-                <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                  React, TypeScript, and scalable frontend architecture
-                </span>
-                , with hands-on experience integrating{" "}
-                <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                  APIs, cloud infrastructure, and machine learning models
-                </span>{" "}
-                into real-world applications.
-              </p>
-
-              {profile.introduction.detailedBio.map((paragraph, index) => (
-                <p
-                  key={index}
-                  className='text-slate-700 dark:text-slate-300 text-base leading-relaxed group hover:bg-slate-100 dark:hover:bg-navy-light/10 p-3 rounded-lg transition-colors'>
-                  {index === 0 && (
-                    <>
-                      Currently, I lead the{" "}
-                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                        frontend development
-                      </span>{" "}
-                      of a{" "}
-                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                        part-time job marketplace
-                      </span>{" "}
-                      tailored for{" "}
-                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                        international students
-                      </span>{" "}
-                      in Australia, and an{" "}
-                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                        AI-based restaurant review summarizer
-                      </span>{" "}
-                      built for{" "}
-                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                        global travelers
-                      </span>
-                      . These projects reflect my ability to{" "}
-                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                        design, build, and ship complete products
-                      </span>{" "}
-                      from{" "}
-                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                        idea to deployment
-                      </span>{" "}
-                      —{" "}
-                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                        independently or in small teams
-                      </span>
-                      .
-                    </>
-                  )}
-                  {index === 1 && (
-                    <>
-                      Previously, I worked as a developer in Korea while pursuing my{" "}
-                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                        Master&apos;s in IT at UTS
-                      </span>
-                      , where I earned{" "}
-                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                        distinction-level results
-                      </span>{" "}
-                      across{" "}
-                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                        AI and software engineering
-                      </span>{" "}
-                      coursework. I enjoy{" "}
-                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                        experimenting with new ideas
-                      </span>{" "}
-                      in my spare time — whether it&apos;s{" "}
-                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                        prototyping microservices
-                      </span>
-                      ,{" "}
-                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                        deploying ML APIs
-                      </span>
-                      , or{" "}
-                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                        designing product interfaces
-                      </span>{" "}
-                      with{" "}
-                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                        Tailwind and Figma
-                      </span>
-                      .
-                    </>
-                  )}
-                  {index === 2 && (
-                    <>
-                      I&apos;m driven by{" "}
-                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                        curiosity, practicality
-                      </span>
-                      , and the{" "}
-                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                        excitement
-                      </span>{" "}
-                      of turning ideas into{" "}
-                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                        polished, user-focused experiences
-                      </span>{" "}
-                      — especially when those ideas can{" "}
-                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                        scale
-                      </span>
-                      .
-                    </>
-                  )}
+      <div className='w-full lg:w-1/2 min-h-screen'>
+        <main className='w-full h-full'>
+          {/* Hero Section */}
+          <section id='about' className='min-h-screen flex flex-col justify-center'>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className='space-y-6 px-8'>
+              <h2 className='font-mono text-green-600 dark:text-green-400 text-sm'>01. About Me</h2>
+              <div className='space-y-6'>
+                <p className='text-slate-700 dark:text-slate-300 text-base leading-relaxed group hover:bg-slate-100 dark:hover:bg-navy-light/10 p-3 rounded-lg transition-colors'>
+                  I&apos;m a{" "}
+                  <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                    full-stack engineer
+                  </span>{" "}
+                  based in Sydney with a passion for building{" "}
+                  <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                    intuitive, AI-powered digital products
+                  </span>
+                  . I specialize in{" "}
+                  <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                    React, TypeScript, and scalable frontend architecture
+                  </span>
+                  , with hands-on experience integrating{" "}
+                  <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                    APIs, cloud infrastructure, and machine learning models
+                  </span>{" "}
+                  into real-world applications.
                 </p>
-              ))}
-            </div>
-          </motion.div>
-        </section>
 
-        {/* Experience Section */}
-        <section
-          id='experience'
-          className='min-h-screen py-24 px-8 md:px-16 lg:px-24 max-w-[1000px]'>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className='relative'>
-            <div className='sticky top-24'>
+                {profile.introduction.detailedBio.map((paragraph, index) => (
+                  <p
+                    key={index}
+                    className='text-slate-700 dark:text-slate-300 text-base leading-relaxed group hover:bg-slate-100 dark:hover:bg-navy-light/10 p-3 rounded-lg transition-colors'>
+                    {index === 0 && (
+                      <>
+                        Currently, I lead the{" "}
+                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                          frontend development
+                        </span>{" "}
+                        of a{" "}
+                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                          part-time job marketplace
+                        </span>{" "}
+                        tailored for{" "}
+                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                          international students
+                        </span>{" "}
+                        in Australia, and an{" "}
+                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                          AI-based restaurant review summarizer
+                        </span>{" "}
+                        built for{" "}
+                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                          global travelers
+                        </span>
+                        . These projects reflect my ability to{" "}
+                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                          design, build, and ship complete products
+                        </span>{" "}
+                        from{" "}
+                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                          idea to deployment
+                        </span>{" "}
+                        —{" "}
+                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                          independently or in small teams
+                        </span>
+                      </>
+                    )}
+                    {index === 1 && (
+                      <>
+                        Previously, I worked as a developer in Korea while pursuing my{" "}
+                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                          Master&apos;s in IT at UTS
+                        </span>
+                        , where I earned{" "}
+                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                          distinction-level results
+                        </span>{" "}
+                        across{" "}
+                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                          AI and software engineering
+                        </span>{" "}
+                        coursework. I enjoy{" "}
+                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                          experimenting with new ideas
+                        </span>{" "}
+                        in my spare time — whether it&apos;s{" "}
+                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                          prototyping microservices
+                        </span>
+                        ,{" "}
+                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                          deploying ML APIs
+                        </span>
+                        , or{" "}
+                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                          designing product interfaces
+                        </span>{" "}
+                        with{" "}
+                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                          Tailwind and Figma
+                        </span>
+                      </>
+                    )}
+                    {index === 2 && (
+                      <>
+                        I&apos;m driven by{" "}
+                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                          curiosity, practicality
+                        </span>
+                        , and the{" "}
+                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                          excitement
+                        </span>{" "}
+                        of turning ideas into{" "}
+                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                          polished, user-focused experiences
+                        </span>{" "}
+                        — especially when those ideas can{" "}
+                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                          scale
+                        </span>
+                      </>
+                    )}
+                  </p>
+                ))}
+              </div>
+            </motion.div>
+          </section>
+
+          {/* Experience Section */}
+          <section id='experience' className='min-h-screen py-24'>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className='px-8'>
               <h2 className='font-mono text-green-600 dark:text-green-400 text-sm mb-4'>
                 02. Work Experience
               </h2>
@@ -269,19 +268,17 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-            </div>
-          </motion.div>
-        </section>
+            </motion.div>
+          </section>
 
-        {/* Projects Section */}
-        <section id='projects' className='min-h-screen py-24 px-8 md:px-16 lg:px-24'>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className='relative'>
-            <div className='sticky top-24 max-w-[1200px] mx-auto'>
+          {/* Projects Section */}
+          <section id='projects' className='min-h-screen py-24'>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className='px-8'>
               <h2 className='font-mono text-green-600 dark:text-green-400 text-sm mb-4'>
                 03. Some Things I&apos;ve Built
               </h2>
@@ -293,37 +290,35 @@ export default function Home() {
                   <ProjectCard key={project.title} project={project} onOpenModal={openModal} />
                 ))}
               </div>
-            </div>
-          </motion.div>
-        </section>
+            </motion.div>
+          </section>
 
-        {/* Contact Section */}
-        <section
-          id='contact'
-          className='min-h-screen py-24 px-8 md:px-16 lg:px-24 flex items-center justify-center max-w-[1000px] mx-auto'>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className='text-center'>
-            <h2 className='font-mono text-green-600 dark:text-green-400 text-sm mb-4'>
-              04. What&apos;s Next?
-            </h2>
-            <h3 className='text-3xl font-bold text-slate-900 dark:text-slate-100 mb-4'>
-              Get In Touch
-            </h3>
-            <p className='text-slate-700 dark:text-slate-300 max-w-md mx-auto mb-8 text-base'>
-              {profile.introduction.currentWork}
-            </p>
-            <a
-              href={`mailto:${profile.email}`}
-              className='inline-block py-3 px-6 border-2 border-green-600 dark:border-green-400 text-green-600 dark:text-green-400 font-mono hover:bg-green-600/10 dark:hover:bg-green-400/10 transition-colors'>
-              Say Hello
-            </a>
-          </motion.div>
-        </section>
-      </main>
+          {/* Contact Section */}
+          <section id='contact' className='min-h-screen py-24 flex items-center justify-center'>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className='text-center px-8'>
+              <h2 className='font-mono text-green-600 dark:text-green-400 text-sm mb-4'>
+                04. What&apos;s Next?
+              </h2>
+              <h3 className='text-3xl font-bold text-slate-900 dark:text-slate-100 mb-4'>
+                Get In Touch
+              </h3>
+              <p className='text-slate-700 dark:text-slate-300 max-w-md mx-auto mb-8 text-base'>
+                {profile.introduction.currentWork}
+              </p>
+              <a
+                href={`mailto:${profile.email}`}
+                className='inline-block py-3 px-6 border-2 border-green-600 dark:border-green-400 text-green-600 dark:text-green-400 font-mono hover:bg-green-600/10 dark:hover:bg-green-400/10 transition-colors'>
+                Say Hello
+              </a>
+            </motion.div>
+          </section>
+        </main>
+      </div>
 
       <ProjectModal isOpen={isModalOpen} closeModal={closeModal} project={selectedProject} />
     </div>

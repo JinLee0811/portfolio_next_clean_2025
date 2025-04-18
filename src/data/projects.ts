@@ -42,9 +42,9 @@ export const projects: Project[] = [
       },
     ],
     architectureDesc:
-      "Monolithic application structure using Next.js API routes for backend logic.",
+      "Monolithic application structure using Next.js for both frontend and API routes. Leveraged Prisma ORM for database interactions with MongoDB. State management primarily handled by React's native hooks (useState, useContext).",
     architectureChoice:
-      "Used built-in React state management (useState, useContext) for simplicity in this solo project.",
+      "Chose Next.js for its integrated frontend/backend capabilities and SEO benefits. Opted for React hooks for state management due to the project's moderate complexity and to minimize external dependencies.",
     challenges: [
       {
         problem: "Integrating Prisma with Next.js API routes efficiently.",
@@ -58,16 +58,29 @@ export const projects: Project[] = [
     achievements: [
       "Successfully deployed the application on Vercel.",
       "Gained hands-on experience with the T3 stack components.",
+      "Achieved Lighthouse performance score of 85+ on key pages.",
     ],
     collaboration: [
-      "Solo project managed via GitHub Projects.",
-      "Self-conducted code reviews following best practices.",
+      "Solo project managed via GitHub Projects using a Kanban board.",
+      "Followed conventional commits for version control.",
+      "Self-conducted code reviews following best practices before merging branches.",
+      "Documented core components and setup process in README.",
     ],
-    testing: ["Manual testing for core user flows.", "ESLint and Prettier for code quality."],
-    deployment: ["Continuous deployment via Vercel connected to GitHub main branch."],
+    testing: [
+      "Manual testing for core user flows (authentication, browsing, wishlist).",
+      "ESLint and Prettier configured for static code analysis and formatting.",
+      "Implemented basic unit tests for utility functions using Jest (Coverage: ~30%).",
+    ],
+    deployment: [
+      "Continuous deployment via Vercel connected to the GitHub main branch.",
+      "Configured environment variables for API keys and database connection strings in Vercel.",
+      "Monitored deployment status and runtime logs using the Vercel dashboard.",
+    ],
     lessonsLearned: [
-      "Deepened understanding of full-stack development.",
-      "Learned the importance of database schema design early on.",
+      "Deepened understanding of full-stack development with Next.js.",
+      "Learned the importance of database schema design and indexing for performance.",
+      "Realized the benefits of component-based architecture for maintainability.",
+      "Improved skills in integrating third-party authentication services.",
     ],
   },
 ];

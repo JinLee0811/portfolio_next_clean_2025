@@ -24,22 +24,24 @@ export default function Sidebar({ isDarkMode, toggleDarkMode, activeSection }: S
     <motion.div
       initial={{ x: -100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
-      className='fixed top-0 left-0 h-screen w-[40vw] bg-white dark:bg-navy-dark flex items-center justify-center'>
-      <div className='flex flex-col gap-20 w-full px-10 ml-20'>
+      className='h-screen w-full sticky top-0 bg-white dark:bg-navy-dark flex items-center'>
+      <div className='flex flex-col gap-10 lg:gap-16 px-8'>
         {/* Name and Description */}
-        <div className='space-y-3'>
-          <h1 className='text-slate-900 dark:text-slate-100 text-6xl font-semibold tracking-tight'>
+        <div className='space-y-4'>
+          <h1 className='text-4xl lg:text-6xl text-slate-900 dark:text-slate-100 font-semibold tracking-tight'>
             {profile.name}
           </h1>
-          <h2 className='text-slate-700 dark:text-slate-300 text-2xl font-light'>{profile.role}</h2>
-          <p className='text-slate-600 dark:text-slate-400 text-lg leading-relaxed'>
+          <h2 className='text-xl lg:text-2xl text-slate-700 dark:text-slate-300 font-light'>
+            {profile.role}
+          </h2>
+          <p className='text-base lg:text-lg text-slate-600 dark:text-slate-400 leading-relaxed'>
             {profile.shortDescription}
           </p>
         </div>
 
         {/* Navigation */}
         <nav>
-          <ul className='flex flex-col space-y-4'>
+          <ul className='flex flex-col space-y-6'>
             {navItems.map((item, i) => (
               <motion.li
                 key={item.name}
