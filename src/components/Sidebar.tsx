@@ -62,7 +62,7 @@ export default function Sidebar({ isDarkMode, toggleDarkMode, activeSection }: S
                       "tracking-wide uppercase transition-all duration-300",
                       activeSection === item.section
                         ? "text-lg text-slate-900 dark:text-slate-100"
-                        : "text-base text-slate-500 dark:text-slate-400",
+                        : "text-sm text-slate-500 dark:text-slate-400",
                       "group-hover:text-slate-900 dark:group-hover:text-slate-100"
                     )}>
                     {item.name}

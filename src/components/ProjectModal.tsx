@@ -1,191 +1,395 @@
-import { Dialog, Transition } from "@headlessui/react";
-import { Fragment } from "react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+"use client";
+
+import React from "react";
+import Slider from "react-slick";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  XMarkIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  LinkIcon,
+  CodeBracketIcon,
+} from "@heroicons/react/24/solid";
+import { Project } from "../types/project";
 
-interface TechStack {
-  name: string;
-  icon?: string;
-}
-
-interface ProjectDetails {
-  title: string;
-  description: string;
-  images: string[];
-  techStack: TechStack[];
-  buildProcess: string[];
-  challenges: string[];
-  liveUrl?: string;
-  githubUrl?: string;
-}
+// react-slick CSS 임포트
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 interface ProjectModalProps {
   isOpen: boolean;
   closeModal: () => void;
-  project: ProjectDetails;
+  project: Project | null;
 }
 
-export default function ProjectModal({ isOpen, closeModal, project }: ProjectModalProps) {
+interface ArrowProps {
+  className?: string;
+  style?: React.CSSProperties;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+const NextArrow = (props: ArrowProps) => {
+  const { className, style, onClick } = props;
   return (
-    <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as='div' className='relative z-50' onClose={closeModal}>
-        {/* 배경 오버레이 - 클릭시 모달 닫힘 */}
-        <Transition.Child
-          as={Fragment}
-          enter='ease-out duration-300'
-          enterFrom='opacity-0'
-          enterTo='opacity-100'
-          leave='ease-in duration-200'
-          leaveFrom='opacity-100'
-          leaveTo='opacity-0'>
-          <div className='fixed inset-0 bg-black/70' aria-hidden='true' onClick={closeModal} />
-        </Transition.Child>
+    <button
+      className={`${className} slick-arrow !flex items-center justify-center !w-10 !h-10 !bg-slate-800/50 dark:!bg-navy-light/50 hover:!bg-slate-800/80 dark:hover:!bg-navy-light/80 rounded-full !right-4 z-10 transition-colors`}
+      style={{ ...style }}
+      onClick={onClick}
+      aria-label='Next image'>
+      <ChevronRightIcon className='w-5 h-5 text-white' />
+    </button>
+  );
+};
 
-        <div className='fixed inset-0 overflow-y-auto'>
-          <div className='flex min-h-full items-center justify-center p-4'>
-            <Transition.Child
-              as={Fragment}
-              enter='ease-out duration-300'
-              enterFrom='opacity-0 scale-95'
-              enterTo='opacity-100 scale-100'
-              leave='ease-in duration-200'
-              leaveFrom='opacity-100 scale-100'
-              leaveTo='opacity-0 scale-95'>
-              <Dialog.Panel className='w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white shadow-2xl transition-all'>
-                {/* 모달 헤더 */}
-                <div className='relative bg-white px-8 py-6 border-b border-gray-100'>
-                  <div className='flex items-center justify-between'>
-                    <Dialog.Title as='h3' className='text-2xl font-bold text-gray-900'>
-                      {project.title}
-                    </Dialog.Title>
-                    <button
-                      onClick={closeModal}
-                      className='rounded-full p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 transition-colors'>
-                      <XMarkIcon className='h-6 w-6' />
-                    </button>
-                  </div>
-                </div>
+const PrevArrow = (props: ArrowProps) => {
+  const { className, style, onClick } = props;
+  return (
+    <button
+      className={`${className} slick-arrow !flex items-center justify-center !w-10 !h-10 !bg-slate-800/50 dark:!bg-navy-light/50 hover:!bg-slate-800/80 dark:hover:!bg-navy-light/80 rounded-full !left-4 z-10 transition-colors`}
+      style={{ ...style }}
+      onClick={onClick}
+      aria-label='Previous image'>
+      <ChevronLeftIcon className='w-5 h-5 text-white' />
+    </button>
+  );
+};
 
-                <div className='px-8 py-6'>
-                  {/* 이미지 섹션 */}
-                  {project.images && project.images.length > 0 && (
-                    <div className='mb-8 space-y-4'>
-                      {project.images.map((image, index) => (
-                        <div key={index} className='relative h-[400px] rounded-xl overflow-hidden'>
+export default function ProjectModal({ isOpen, closeModal, project }: ProjectModalProps) {
+  if (!project) return null;
+
+  const settings = {
+    dots: true,
+    infinite: project.imageUrls.length > 1,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    pauseOnHover: true,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
+    arrows: project.imageUrls.length > 1,
+    appendDots: (dots: React.ReactNode) => (
+      <div className='absolute bottom-4 left-0 right-0'>
+        <ul className='m-0 flex justify-center space-x-2'> {dots} </ul>
+      </div>
+    ),
+    customPaging: () => (
+      <div className='w-2.5 h-2.5 rounded-full bg-white/40 dark:bg-slate-600/50 transition-all duration-300 slick-dots-inactive'></div>
+    ),
+    dotsClass: "slick-dots custom-dots",
+  };
+
+  const renderSection = (title: string, content: React.ReactNode, secondary = false) => (
+    <div className='mb-8'>
+      <h3
+        className={`text-xl font-semibold mb-4 font-sans ${secondary ? "text-slate-700 dark:text-slate-300" : "text-slate-800 dark:text-slate-200"}`}>
+        {title}
+      </h3>
+      {content}
+    </div>
+  );
+
+  const renderList = (items: string[], style: "disc" | "none" = "disc") => (
+    <ul
+      className={`${style === "disc" ? "list-disc list-outside pl-5" : ""} space-y-2 text-slate-700 dark:text-slate-300 text-sm md:text-base`}>
+      {items.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </ul>
+  );
+
+  const renderKeyValueList = (items: { [key: string]: string }[] | undefined) => {
+    if (!items) return null;
+
+    return (
+      <ul className='space-y-4 text-sm md:text-base'>
+        {items.map((item, index) => {
+          const key = Object.keys(item)[0];
+          const value = item[key];
+          const secondKey = Object.keys(item)[1];
+          const secondValue = item[secondKey];
+
+          return (
+            <li key={index}>
+              {key && (
+                <p className='font-semibold text-slate-800 dark:text-slate-200 mb-1'>
+                  {item.title || key.charAt(0).toUpperCase() + key.slice(1)}:
+                </p>
+              )}
+              {value && <p className='text-slate-700 dark:text-slate-300 mb-2 ml-2'>{value}</p>}
+              {secondKey && (
+                <p className='font-semibold text-slate-800 dark:text-slate-200 mb-1'>
+                  {secondKey.charAt(0).toUpperCase() + secondKey.slice(1)}:
+                </p>
+              )}
+              {secondValue && (
+                <p className='text-slate-700 dark:text-slate-300 ml-2'>{secondValue}</p>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    );
+  };
+
+  const renderTechList = (techItems: string[] | undefined) => {
+    if (!techItems || techItems.length === 0) return null;
+    return (
+      <div className='flex flex-wrap gap-2'>
+        {techItems.map((tech, index) => (
+          <span
+            key={index}
+            className='px-2.5 py-0.5 text-xs font-mono rounded-md 
+                     text-teal-700 dark:text-teal-300 
+                     bg-teal-100 dark:bg-teal-900/30 
+                     border border-teal-200/80 dark:border-teal-800/80'>
+            {tech}
+          </span>
+        ))}
+      </div>
+    );
+  };
+
+  return (
+    <>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className='fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-center justify-center p-4'
+            onClick={closeModal}>
+            <motion.div
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 50, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 200, damping: 25 }}
+              className='bg-white dark:bg-navy rounded-lg shadow-xl max-w-5xl w-full max-h-[90vh] flex flex-col overflow-hidden'
+              onClick={(e) => e.stopPropagation()}>
+              <div className='flex items-center justify-between p-5 md:p-6 border-b border-slate-200 dark:border-navy-light flex-shrink-0'>
+                <h2 className='text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-100 font-sans'>
+                  {project.title}
+                </h2>
+                <button
+                  onClick={closeModal}
+                  className='p-1 rounded-full text-slate-400 dark:text-slate-500 hover:bg-slate-100 dark:hover:bg-navy-light transition-colors'
+                  aria-label='Close modal'>
+                  <XMarkIcon className='w-6 h-6' />
+                </button>
+              </div>
+
+              <div className='flex-1 overflow-y-auto p-5 md:p-8 project-modal-body'>
+                <div className='mb-10 relative project-slider-container'>
+                  {project.imageUrls && project.imageUrls.length > 0 ? (
+                    <Slider {...settings}>
+                      {project.imageUrls.map((imgUrl, index) => (
+                        <div
+                          key={index}
+                          className='relative aspect-video bg-slate-100 dark:bg-navy-light rounded-md overflow-hidden max-h-[60vh]'>
                           <Image
-                            src={image}
+                            src={imgUrl}
                             alt={`${project.title} screenshot ${index + 1}`}
-                            fill
-                            className='object-cover'
+                            layout='fill'
+                            objectFit='contain'
+                            priority={index === 0}
                           />
                         </div>
                       ))}
+                    </Slider>
+                  ) : (
+                    <div className='aspect-video bg-slate-100 dark:bg-navy-light rounded-md flex items-center justify-center text-slate-500'>
+                      Image not available
                     </div>
                   )}
-
-                  {/* 프로젝트 설명 */}
-                  <div className='mb-8'>
-                    <h4 className='text-xl font-semibold text-gray-900 mb-4'>프로젝트 소개</h4>
-                    <p className='text-gray-600 leading-relaxed whitespace-pre-line'>
-                      {project.description}
-                    </p>
-                  </div>
-
-                  {/* 기술 스택 */}
-                  <div className='mb-8'>
-                    <h4 className='text-xl font-semibold text-gray-900 mb-4'>기술 스택</h4>
-                    <div className='flex flex-wrap gap-2'>
-                      {project.techStack.map((tech, index) => (
-                        <span
-                          key={index}
-                          className='px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium'>
-                          {tech.name}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* 개발 과정 */}
-                  {project.buildProcess.length > 0 && (
-                    <div className='mb-8'>
-                      <h4 className='text-xl font-semibold text-gray-900 mb-4'>개발 과정</h4>
-                      <ul className='space-y-3'>
-                        {project.buildProcess.map((step, index) => (
-                          <li key={index} className='flex items-start'>
-                            <span className='flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3 mt-1'>
-                              {index + 1}
-                            </span>
-                            <p className='text-gray-600'>{step}</p>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {/* 도전 과제 및 해결 방법 */}
-                  {project.challenges.length > 0 && (
-                    <div className='mb-8'>
-                      <h4 className='text-xl font-semibold text-gray-900 mb-4'>
-                        도전 과제 및 해결 방법
-                      </h4>
-                      <div className='space-y-4'>
-                        {project.challenges.map((challenge, index) => (
-                          <div
-                            key={index}
-                            className='p-4 bg-gray-50 rounded-lg border border-gray-100'>
-                            <p className='text-gray-600'>{challenge}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* 링크 */}
-                  <div className='flex gap-4 pt-4 border-t border-gray-100'>
-                    {project.liveUrl && (
-                      <a
-                        href={project.liveUrl}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        className='inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors'>
-                        <span className='mr-2'>Live Demo</span>
-                        <svg
-                          className='w-5 h-5'
-                          fill='none'
-                          stroke='currentColor'
-                          viewBox='0 0 24 24'>
-                          <path
-                            strokeLinecap='round'
-                            strokeLinejoin='round'
-                            strokeWidth={2}
-                            d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14'
-                          />
-                        </svg>
-                      </a>
-                    )}
-                    {project.githubUrl && (
-                      <a
-                        href={project.githubUrl}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        className='inline-flex items-center px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors'>
-                        <span className='mr-2'>GitHub</span>
-                        <svg className='w-5 h-5' fill='currentColor' viewBox='0 0 24 24'>
-                          <path
-                            fillRule='evenodd'
-                            d='M12 2C6.477 2 2 6.463 2 11.97c0 4.404 2.865 8.14 6.839 9.458.5.092.682-.216.682-.48 0-.236-.008-.864-.013-1.695-2.782.602-3.369-1.337-3.369-1.337-.454-1.151-1.11-1.458-1.11-1.458-.908-.618.069-.606.069-.606 1.003.07 1.531 1.027 1.531 1.027.892 1.524 2.341 1.084 2.91.828.092-.643.35-1.083.636-1.332-2.22-.251-4.555-1.107-4.555-4.927 0-1.088.39-1.979 1.029-2.675-.103-.252-.446-1.266.098-2.638 0 0 .84-.268 2.75 1.022A9.606 9.606 0 0112 6.82c.85.004 1.705.114 2.504.336 1.909-1.29 2.747-1.022 2.747-1.022.546 1.372.202 2.386.1 2.638.64.696 1.028 1.587 1.028 2.675 0 3.83-2.339 4.673-4.566 4.92.359.307.678.915.678 1.846 0 1.332-.012 2.407-.012 2.734 0 .267.18.577.688.48C19.137 20.107 22 16.373 22 11.969 22 6.463 17.522 2 12 2z'
-                            clipRule='evenodd'
-                          />
-                        </svg>
-                      </a>
-                    )}
-                  </div>
                 </div>
-              </Dialog.Panel>
-            </Transition.Child>
-          </div>
-        </div>
-      </Dialog>
-    </Transition>
+
+                {renderSection(
+                  "Project Overview",
+                  <>
+                    {project.projectGoal && (
+                      <p className='text-slate-700 dark:text-slate-300 mb-3 text-sm md:text-base'>
+                        {project.projectGoal}
+                      </p>
+                    )}
+                    {project.coreValue && (
+                      <p className='text-slate-700 dark:text-slate-300 text-sm md:text-base'>{`Core Value: ${project.coreValue}`}</p>
+                    )}
+                    {!project.projectGoal && !project.coreValue && project.description && (
+                      <p className='text-slate-700 dark:text-slate-300 text-sm md:text-base'>
+                        {project.description}
+                      </p>
+                    )}
+                  </>
+                )}
+
+                {renderSection(
+                  "Timeline & Your Role",
+                  <>
+                    {project.date && (
+                      <p className='font-semibold text-slate-800 dark:text-slate-200 mb-1 text-sm md:text-base'>{`Timeline: ${project.date}`}</p>
+                    )}
+                    {project.yourRole && project.yourRole.length > 0 && (
+                      <div className='mt-3'>
+                        <p className='font-semibold text-slate-800 dark:text-slate-200 mb-1 text-sm md:text-base'>
+                          My Role:
+                        </p>
+                        {renderList(project.yourRole)}
+                      </div>
+                    )}
+                  </>
+                )}
+
+                {renderSection(
+                  "Tech Stack",
+                  <div className='space-y-4'>
+                    {project.technologies && project.technologies.length > 0 && (
+                      <div>
+                        <h4 className='font-semibold text-slate-700 dark:text-slate-300 mb-2 text-sm md:text-base'>
+                          Core Technologies:
+                        </h4>
+                        {renderTechList(project.technologies)}
+                      </div>
+                    )}
+                    {project.techInfra && project.techInfra.length > 0 && (
+                      <div>
+                        <h4 className='font-semibold text-slate-700 dark:text-slate-300 mb-2 text-sm md:text-base'>
+                          Infrastructure & DevOps:
+                        </h4>
+                        {renderTechList(project.techInfra)}
+                      </div>
+                    )}
+                    {project.techDbApi && project.techDbApi.length > 0 && (
+                      <div>
+                        <h4 className='font-semibold text-slate-700 dark:text-slate-300 mb-2 text-sm md:text-base'>
+                          Databases & APIs:
+                        </h4>
+                        {renderTechList(project.techDbApi)}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {renderSection(
+                  "Key Features & Implementation",
+                  renderKeyValueList(project.keyFeatures)
+                )}
+
+                {(project.architectureDesc || project.architectureChoice) &&
+                  renderSection(
+                    "Architecture & Design",
+                    <>
+                      {project.architectureDesc && (
+                        <p className='text-slate-700 dark:text-slate-300 mb-3 text-sm md:text-base'>
+                          {project.architectureDesc}
+                        </p>
+                      )}
+                      {project.architectureChoice && (
+                        <p className='text-slate-700 dark:text-slate-300 text-sm md:text-base'>{`Design Choice: ${project.architectureChoice}`}</p>
+                      )}
+                    </>
+                  )}
+
+                {renderSection("Challenges & Solutions", renderKeyValueList(project.challenges))}
+
+                {project.achievements &&
+                  project.achievements.length > 0 &&
+                  renderSection("Achievements & Metrics", renderList(project.achievements))}
+
+                {project.collaboration &&
+                  project.collaboration.length > 0 &&
+                  renderSection("Collaboration & Workflow", renderList(project.collaboration))}
+
+                {project.testing &&
+                  project.testing.length > 0 &&
+                  renderSection("Testing & QA", renderList(project.testing))}
+
+                {project.deployment &&
+                  project.deployment.length > 0 &&
+                  renderSection("Deployment & Monitoring", renderList(project.deployment))}
+
+                {project.lessonsLearned &&
+                  project.lessonsLearned.length > 0 &&
+                  renderSection("Lessons Learned", renderList(project.lessonsLearned))}
+              </div>
+
+              <div className='flex items-center justify-end gap-4 p-5 md:p-6 border-t border-slate-200 dark:border-navy-light bg-slate-50 dark:bg-navy-light/30 flex-shrink-0'>
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-md text-slate-700 dark:text-slate-300 bg-white dark:bg-navy-light border border-slate-300 dark:border-navy-light hover:bg-slate-50 dark:hover:bg-navy-light/80 transition-colors shadow-sm'>
+                    <CodeBracketIcon className='w-4 h-4' /> GitHub
+                  </a>
+                )}
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-md text-white bg-green-600 dark:bg-green-500 hover:bg-green-700 dark:hover:bg-green-600 transition-colors shadow-sm'>
+                    <LinkIcon className='w-4 h-4' /> Live Demo
+                  </a>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <style jsx global>{`
+        .slick-dots li button:before {
+          content: "";
+        }
+        .slick-dots li {
+          margin: 0 4px;
+        }
+        .slick-dots li div {
+          transition:
+            background-color 0.3s ease,
+            transform 0.3s ease;
+        }
+        .slick-dots li.slick-active div {
+          background-color: white;
+          transform: scale(1.2);
+        }
+        .dark .slick-dots li.slick-active div {
+          background-color: hsl(var(--primary-foreground));
+        }
+        .slick-arrow {
+          transition: background-color 0.2s ease-in-out;
+          opacity: 0.8;
+        }
+        .slick-arrow:hover {
+          opacity: 1;
+        }
+        .slick-prev::before,
+        .slick-next::before {
+          content: "" !important;
+        }
+        .project-modal-body::-webkit-scrollbar {
+          width: 6px;
+        }
+        .project-modal-body::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .project-modal-body::-webkit-scrollbar-thumb {
+          background: #cbd5e1;
+          border-radius: 3px;
+        }
+        .dark .project-modal-body::-webkit-scrollbar-thumb {
+          background: #475569;
+        }
+        .project-modal-body::-webkit-scrollbar-thumb:hover {
+          background: #94a3b8;
+        }
+        .dark .project-modal-body::-webkit-scrollbar-thumb:hover {
+          background: #64748b;
+        }
+      `}</style>
+    </>
   );
 }

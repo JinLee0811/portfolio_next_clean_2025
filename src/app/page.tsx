@@ -4,15 +4,22 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Sidebar from "@/components/Sidebar";
 import ProjectCard from "@/components/ProjectCard";
+import ProjectFilters from "@/components/ProjectFilters";
 import MouseFollower from "@/components/MouseFollower";
+import ProjectModal from "@/components/ProjectModal";
 import { projects } from "../data/projects";
 import { profile } from "../data/profile";
 import { experiences } from "../data/experience";
+import { Project } from "../types/project";
 import clsx from "clsx";
 
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [activeSection, setActiveSection] = useState("about");
+  const [filteredProjects, setFilteredProjects] = useState(projects);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   useEffect(() => {
     // 초기 로드 시 다크모드 설정
@@ -42,6 +49,35 @@ export default function Home() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleFilterChange = (category: string, tech: string) => {
+    let filtered = [...projects];
+
+    if (category !== "All") {
+      filtered = filtered.filter((project) => {
+        if (category === "Featured") return project.featured;
+        return project.category === category;
+      });
+    }
+
+    if (tech !== "All") {
+      filtered = filtered.filter((project) =>
+        project.technologies.some((t) => t.toLowerCase() === tech.toLowerCase())
+      );
+    }
+
+    setFilteredProjects(filtered);
+  };
+
+  const openModal = (project: Project) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
+  };
 
   return (
     <div className={clsx("min-h-screen", isDarkMode ? "bg-navy-dark" : "bg-white")}>
@@ -249,8 +285,13 @@ export default function Home() {
               <h2 className='font-mono text-green-600 dark:text-green-400 text-sm mb-4'>
                 03. Some Things I&apos;ve Built
               </h2>
-              <div className='grid grid-cols-1 gap-8'>
-                {projects?.map((project) => <ProjectCard key={project.title} project={project} />)}
+
+              <ProjectFilters onFilterChange={handleFilterChange} />
+
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                {filteredProjects.map((project) => (
+                  <ProjectCard key={project.title} project={project} onOpenModal={openModal} />
+                ))}
               </div>
             </div>
           </motion.div>
@@ -283,6 +324,8 @@ export default function Home() {
           </motion.div>
         </section>
       </main>
+
+      <ProjectModal isOpen={isModalOpen} closeModal={closeModal} project={selectedProject} />
     </div>
   );
 }
