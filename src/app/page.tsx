@@ -1,103 +1,288 @@
-import Image from "next/image";
+"use client";
+
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import Sidebar from "@/components/Sidebar";
+import ProjectCard from "@/components/ProjectCard";
+import MouseFollower from "@/components/MouseFollower";
+import { projects } from "../data/projects";
+import { profile } from "../data/profile";
+import { experiences } from "../data/experience";
+import clsx from "clsx";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [activeSection, setActiveSection] = useState("about");
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+  useEffect(() => {
+    // 초기 로드 시 다크모드 설정
+    document.documentElement.classList.toggle("dark", isDarkMode);
+  }, []);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    document.documentElement.classList.toggle("dark");
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ["about", "experience", "projects", "contact"];
+      const sectionElements = sections.map((id) => document.getElementById(id));
+
+      const currentSection = sectionElements.reduce((acc, section) => {
+        if (!section) return acc;
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= window.innerHeight / 3) return section.id;
+        return acc;
+      }, sections[0]);
+
+      setActiveSection(currentSection);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <div className={clsx("min-h-screen", isDarkMode ? "bg-navy-dark" : "bg-white")}>
+      <MouseFollower />
+      <Sidebar
+        isDarkMode={isDarkMode}
+        toggleDarkMode={toggleDarkMode}
+        activeSection={activeSection}
+      />
+
+      <main className='ml-[40vw] min-h-screen w-[60vw]'>
+        {/* Hero Section */}
+        <section id='about' className='min-h-screen flex flex-col justify-center px-16 lg:px-24'>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className='space-y-6'>
+            <h2 className='font-mono text-green-600 dark:text-green-400 text-sm mb-4'>
+              01. About Me
+            </h2>
+            <div className='space-y-5 max-w-2xl'>
+              <p className='text-slate-700 dark:text-slate-300 text-base leading-relaxed group hover:bg-slate-100 dark:hover:bg-navy-light/10 p-3 rounded-lg transition-colors'>
+                I&apos;m a{" "}
+                <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                  full-stack engineer
+                </span>{" "}
+                based in Sydney with a passion for building{" "}
+                <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                  intuitive, AI-powered digital products
+                </span>
+                . I specialize in{" "}
+                <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                  React, TypeScript, and scalable frontend architecture
+                </span>
+                , with hands-on experience integrating{" "}
+                <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                  APIs, cloud infrastructure, and machine learning models
+                </span>{" "}
+                into real-world applications.
+              </p>
+
+              {profile.introduction.detailedBio.map((paragraph, index) => (
+                <p
+                  key={index}
+                  className='text-slate-700 dark:text-slate-300 text-base leading-relaxed group hover:bg-slate-100 dark:hover:bg-navy-light/10 p-3 rounded-lg transition-colors'>
+                  {index === 0 && (
+                    <>
+                      Currently, I lead the{" "}
+                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                        frontend development
+                      </span>{" "}
+                      of a{" "}
+                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                        part-time job marketplace
+                      </span>{" "}
+                      tailored for{" "}
+                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                        international students
+                      </span>{" "}
+                      in Australia, and an{" "}
+                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                        AI-based restaurant review summarizer
+                      </span>{" "}
+                      built for{" "}
+                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                        global travelers
+                      </span>
+                      . These projects reflect my ability to{" "}
+                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                        design, build, and ship complete products
+                      </span>{" "}
+                      from{" "}
+                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                        idea to deployment
+                      </span>{" "}
+                      —{" "}
+                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                        independently or in small teams
+                      </span>
+                      .
+                    </>
+                  )}
+                  {index === 1 && (
+                    <>
+                      Previously, I worked as a developer in Korea while pursuing my{" "}
+                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                        Master&apos;s in IT at UTS
+                      </span>
+                      , where I earned{" "}
+                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                        distinction-level results
+                      </span>{" "}
+                      across{" "}
+                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                        AI and software engineering
+                      </span>{" "}
+                      coursework. I enjoy{" "}
+                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                        experimenting with new ideas
+                      </span>{" "}
+                      in my spare time — whether it&apos;s{" "}
+                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                        prototyping microservices
+                      </span>
+                      ,{" "}
+                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                        deploying ML APIs
+                      </span>
+                      , or{" "}
+                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                        designing product interfaces
+                      </span>{" "}
+                      with{" "}
+                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                        Tailwind and Figma
+                      </span>
+                      .
+                    </>
+                  )}
+                  {index === 2 && (
+                    <>
+                      I&apos;m driven by{" "}
+                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                        curiosity, practicality
+                      </span>
+                      , and the{" "}
+                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                        excitement
+                      </span>{" "}
+                      of turning ideas into{" "}
+                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                        polished, user-focused experiences
+                      </span>{" "}
+                      — especially when those ideas can{" "}
+                      <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                        scale
+                      </span>
+                      .
+                    </>
+                  )}
+                </p>
+              ))}
+            </div>
+          </motion.div>
+        </section>
+
+        {/* Experience Section */}
+        <section
+          id='experience'
+          className='min-h-screen py-24 px-8 md:px-16 lg:px-24 max-w-[1000px]'>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className='relative'>
+            <div className='sticky top-24'>
+              <h2 className='font-mono text-green-600 dark:text-green-400 text-sm mb-4'>
+                02. Work Experience
+              </h2>
+              <div className='space-y-12'>
+                {experiences.map((experience, index) => (
+                  <div key={index} className='group'>
+                    <div className='flex items-center mb-2'>
+                      <h3 className='text-lg text-slate-900 dark:text-slate-100 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors'>
+                        {experience.title}
+                      </h3>
+                      <span className='mx-2 text-slate-700 dark:text-slate-300'>@</span>
+                      <a
+                        href={experience.companyUrl}
+                        className='text-green-600 dark:text-green-400 hover:underline'>
+                        {experience.company}
+                      </a>
+                    </div>
+                    <p className='font-mono text-xs text-slate-500 dark:text-slate-400 mb-4'>
+                      {experience.date}
+                    </p>
+                    <ul className='space-y-2'>
+                      {experience.description.map((item, idx) => (
+                        <li key={idx} className='flex items-start'>
+                          <span className='text-green-600 dark:text-green-400 mr-2'>▹</span>
+                          <span className='text-slate-700 dark:text-slate-300 text-base'>
+                            {item}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* Projects Section */}
+        <section id='projects' className='min-h-screen py-24 px-8 md:px-16 lg:px-24'>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className='relative'>
+            <div className='sticky top-24 max-w-[1200px] mx-auto'>
+              <h2 className='font-mono text-green-600 dark:text-green-400 text-sm mb-4'>
+                03. Some Things I&apos;ve Built
+              </h2>
+              <div className='grid grid-cols-1 gap-8'>
+                {projects?.map((project) => <ProjectCard key={project.title} project={project} />)}
+              </div>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* Contact Section */}
+        <section
+          id='contact'
+          className='min-h-screen py-24 px-8 md:px-16 lg:px-24 flex items-center justify-center max-w-[1000px] mx-auto'>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className='text-center'>
+            <h2 className='font-mono text-green-600 dark:text-green-400 text-sm mb-4'>
+              04. What&apos;s Next?
+            </h2>
+            <h3 className='text-3xl font-bold text-slate-900 dark:text-slate-100 mb-4'>
+              Get In Touch
+            </h3>
+            <p className='text-slate-700 dark:text-slate-300 max-w-md mx-auto mb-8 text-base'>
+              {profile.introduction.currentWork}
+            </p>
+            <a
+              href={`mailto:${profile.email}`}
+              className='inline-block py-3 px-6 border-2 border-green-600 dark:border-green-400 text-green-600 dark:text-green-400 font-mono hover:bg-green-600/10 dark:hover:bg-green-400/10 transition-colors'>
+              Say Hello
+            </a>
+          </motion.div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
