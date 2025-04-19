@@ -3,6 +3,7 @@ export interface Project {
   description: string; // Could be part of Project Overview
   // imageUrl: string;  // 이전 필드 주석 처리 또는 삭제
   imageUrls: string[]; // Demo & Screenshots
+  thumbnail: string; // 프로젝트 썸네일 이미지
   technologies: string[]; // Base Tech Stack
   githubUrl?: string; // Links
   liveUrl?: string; // Links

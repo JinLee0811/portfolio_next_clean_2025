@@ -33,7 +33,7 @@ export default function Home() {
   useEffect(() => {
     // 초기 로드 시 다크모드 설정
     document.documentElement.classList.toggle("dark", isDarkMode);
-  }, []);
+  }, [isDarkMode]);
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
