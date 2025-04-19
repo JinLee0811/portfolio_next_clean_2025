@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Sidebar from "@/components/Sidebar";
 import ProjectCard from "@/components/ProjectCard";
-import ProjectFilters from "@/components/ProjectFilters";
 import MouseFollower from "@/components/MouseFollower";
 import ProjectModal from "@/components/ProjectModal";
 import { projects } from "../data/projects";
@@ -12,14 +11,17 @@ import { profile } from "../data/profile";
 import { experiences } from "../data/experience";
 import { Project } from "../types/project";
 import clsx from "clsx";
+import Link from "next/link";
+import ChatNotification from "@/components/ChatNotification";
 
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [activeSection, setActiveSection] = useState("about");
-  const [filteredProjects, setFilteredProjects] = useState(projects);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedProject] = useState<Project | null>(null);
+  const [showChatNotification, setShowChatNotification] = useState(false);
+  const [hasShownNotification, setHasShownNotification] = useState(false);
+  const projectsRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     // 초기 로드 시 다크모드 설정
@@ -50,34 +52,30 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleFilterChange = (category: string, tech: string) => {
-    let filtered = [...projects];
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasShownNotification) {
+          setTimeout(() => {
+            setShowChatNotification(true);
+            setHasShownNotification(true);
+          }, 1000);
+        }
+      },
+      { threshold: 0.3 }
+    );
 
-    if (category !== "All") {
-      filtered = filtered.filter((project) => {
-        if (category === "Featured") return project.featured;
-        return project.category === category;
-      });
+    if (projectsRef.current) {
+      observer.observe(projectsRef.current);
     }
 
-    if (tech !== "All") {
-      filtered = filtered.filter((project) =>
-        project.technologies.some((t) => t.toLowerCase() === tech.toLowerCase())
-      );
-    }
+    return () => observer.disconnect();
+  }, [hasShownNotification]);
 
-    setFilteredProjects(filtered);
-  };
-
-  const openModal = (project: Project) => {
-    setSelectedProject(project);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedProject(null);
-  };
+  // 최신 프로젝트 4개만 선택
+  const recentProjects = projects
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 4);
 
   return (
     <div
@@ -272,23 +270,41 @@ export default function Home() {
           </section>
 
           {/* Projects Section */}
-          <section id='projects' className='min-h-screen py-24'>
+          <section ref={projectsRef} id='projects' className='min-h-screen py-24'>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
               className='px-8'>
-              <h2 className='font-mono text-green-600 dark:text-green-400 text-sm mb-4'>
-                03. Some Things I&apos;ve Built
+              <h2 className='font-mono text-green-600 dark:text-green-400 text-sm mb-8'>
+                03. Featured Projects
               </h2>
 
-              <ProjectFilters onFilterChange={handleFilterChange} />
-
-              <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
-                {filteredProjects.map((project) => (
-                  <ProjectCard key={project.title} project={project} onOpenModal={openModal} />
+              <div className='space-y-6'>
+                {recentProjects.map((project) => (
+                  <ProjectCard key={project.title} project={project} isFeatured={true} />
                 ))}
+              </div>
+
+              <div className='text-center mt-12'>
+                <Link
+                  href='/projects'
+                  className='inline-flex items-center text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 transition-colors'>
+                  <span className='text-lg'>View All Projects</span>
+                  <svg
+                    className='w-5 h-5 ml-2'
+                    fill='none'
+                    stroke='currentColor'
+                    viewBox='0 0 24 24'>
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M13 7l5 5m0 0l-5 5m5-5H6'
+                    />
+                  </svg>
+                </Link>
               </div>
             </motion.div>
           </section>
@@ -320,7 +336,16 @@ export default function Home() {
         </main>
       </div>
 
-      <ProjectModal isOpen={isModalOpen} closeModal={closeModal} project={selectedProject} />
+      <ProjectModal
+        isOpen={isModalOpen}
+        closeModal={() => setIsModalOpen(false)}
+        project={selectedProject}
+      />
+
+      <ChatNotification
+        isVisible={showChatNotification}
+        onClose={() => setShowChatNotification(false)}
+      />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { Project } from "../types/project";
 export const projects: Project[] = [
   {
     title: "First React Portfolio",
+    thumbnailSummary: "First portfolio website built with React and Styled-components",
     technologies: ["React", "JavaScript", "Styled-components", "CSS3"],
     description:
       "My first portfolio website showcasing the journey into React development. Built with a focus on component-based architecture and styled using Styled-components, this project represents the initial steps in modern web development while highlighting project experiences and technical skills.",
@@ -95,6 +96,8 @@ export const projects: Project[] = [
   },
   {
     title: "Netflix Clone",
+    thumbnailSummary: "Full-stack Netflix clone using Next.js and MongoDB",
+    technologies: ["React", "TypeScript", "Next.js", "Tailwind CSS", "Prisma", "MongoDB"],
     description:
       "A full-stack Netflix clone featuring user authentication (OAuth with GitHub and Google), responsive design, and comprehensive movie management functionality. Key features include wishlist management, movie playback, and mobile optimization. Built with modern tech stack including Next.js, Tailwind CSS, and Prisma, with MongoDB integration.",
     imageUrls: [
@@ -104,7 +107,6 @@ export const projects: Project[] = [
       "/images/netfilx/Modal.png",
       "/images/netfilx/Video.png",
     ],
-    technologies: ["React", "TypeScript", "Next.js", "Tailwind CSS", "Prisma", "MongoDB"],
     githubUrl: "https://github.com/JinLee0811/jin-netflix-clone",
     liveUrl: "https://jin-netflix-clone.vercel.app/",
     date: "2024-07",
@@ -177,6 +179,7 @@ export const projects: Project[] = [
   },
   {
     title: "Shopping Website",
+    thumbnailSummary: "Full-stack e-commerce platform built with Next.js and MongoDB",
     technologies: [
       "React",
       "TypeScript",
@@ -278,6 +281,7 @@ export const projects: Project[] = [
   },
   {
     title: "Data Analysis Web Service",
+    thumbnailSummary: "Public transportation data analysis and visualization web service",
     technologies: [
       "React",
       "JavaScript",
@@ -382,7 +386,8 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: "AI Crop Doctor - Plant Disease Diagnosis Platform",
+    title: "AI Crop Doctor",
+    thumbnailSummary: "AI-powered plant disease diagnosis and prescription platform",
     technologies: [
       "React",
       "TypeScript",
@@ -499,6 +504,7 @@ export const projects: Project[] = [
   },
   {
     title: "Pokémon Volleyball Mini Game",
+    thumbnailSummary: "Pokemon-themed mini game developed with Pygame",
     technologies: ["Python", "Pygame", "2D Graphics"],
     description:
       "An engaging Pokémon-themed volleyball mini-game built with Pygame. This project demonstrates game development fundamentals including physics simulation, sprite animation, and user input handling, all wrapped in a nostalgic Pokémon theme.",
@@ -588,6 +594,7 @@ export const projects: Project[] = [
   },
   {
     title: "Jin.Dev Portfolio 2.0",
+    thumbnailSummary: "Modern portfolio website with Next.js and Framer Motion",
     technologies: ["React", "TypeScript", "Tailwind CSS", "Next.js", "Framer Motion"],
     description:
       "A modern, type-safe portfolio website showcasing my journey as a developer. Built with Next.js and TypeScript, featuring responsive design, smooth animations, and comprehensive project documentation. This is the website you're currently viewing.",
@@ -681,6 +688,582 @@ export const projects: Project[] = [
       "Value of TypeScript in large projects",
       "Benefits of component-based architecture",
       "Significance of performance optimization",
+    ],
+  },
+  {
+    title: "University Management System",
+    thumbnailSummary: "University management system built with Python and Tkinter",
+    technologies: ["Python", "Tkinter", "SQLite", "Git"],
+    description:
+      "A comprehensive university management system featuring both command-line and graphical interfaces. The application evolved from a CLI-based system to include a GUI, demonstrating the progression from basic command-line operations to a full-fledged desktop application.",
+    imageUrls: ["/images/simpleUniApp/UniApp.png"],
+    githubUrl: "https://github.com/JinLee0811/UTS_TeamProject_CLIUniApp-and-GUIUniApp_by_Python",
+    liveUrl: "",
+    date: "2024-03",
+    featured: false,
+    category: "Team Projects",
+
+    projectGoal:
+      "To develop a versatile university management system that demonstrates the evolution from command-line to graphical interface while maintaining data consistency and user functionality.",
+    coreValue:
+      "Providing an efficient and user-friendly system for university data management through both CLI and GUI interfaces.",
+    yourRole: ["Team Lead", "Core Developer", "Git Administrator"],
+    techInfra: ["Python Environment", "Git", "Virtual Environment"],
+    techDbApi: ["SQLite Database", "File System Operations", "Python Standard Library"],
+    keyFeatures: [
+      {
+        title: "Dual Interface",
+        detail: "Both Command Line and Graphical User Interfaces for versatile access",
+      },
+      {
+        title: "Data Management",
+        detail: "Comprehensive CRUD operations for university data handling",
+      },
+      {
+        title: "User Authentication",
+        detail: "Secure login system with role-based access control",
+      },
+      {
+        title: "Report Generation",
+        detail: "Automated report creation and data export capabilities",
+      },
+    ],
+    architectureDesc:
+      "Implemented using Python's standard library for CLI and Tkinter for GUI. Features a modular design with separate components for data handling, user interface, and business logic. Uses SQLite for persistent data storage.",
+    architectureChoice:
+      "Selected Python for its versatility and Tkinter for native GUI development. Implemented a layered architecture to maintain separation of concerns between CLI and GUI interfaces.",
+    challenges: [
+      {
+        problem: "Python environment configuration issues",
+        solution:
+          "Implemented robust environment management using virtual environments and detailed setup documentation",
+      },
+      {
+        problem: "Data synchronization between interfaces",
+        solution: "Created a unified data layer ensuring consistency across CLI and GUI operations",
+      },
+      {
+        problem: "Environment variable management",
+        solution:
+          "Developed a centralized configuration system with proper error handling and validation",
+      },
+    ],
+    achievements: [
+      "Successfully delivered both CLI and GUI versions",
+      "Maintained data consistency across interfaces",
+      "Implemented comprehensive error handling",
+      "Created detailed documentation for setup and usage",
+    ],
+    collaboration: [
+      "Led team development efforts",
+      "Managed Git repository and version control",
+      "Coordinated between CLI and GUI development teams",
+      "Implemented code review processes",
+    ],
+    testing: [
+      "Comprehensive unit testing for core functionality",
+      "Integration testing between interfaces",
+      "User acceptance testing for GUI features",
+      "Performance testing for database operations",
+    ],
+    deployment: [
+      "Created automated build process",
+      "Implemented proper version control workflow",
+      "Developed installation documentation",
+      "Set up continuous integration pipeline",
+    ],
+    lessonsLearned: [
+      "Importance of environment management in Python",
+      "Value of modular design in dual-interface applications",
+      "Benefits of proper version control practices",
+      "Significance of thorough documentation",
+    ],
+  },
+  {
+    title: "PartTimeMate - Job Matching Platform",
+    technologies: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "NestJS",
+      "MySQL",
+      "React Native",
+      "Expo",
+    ],
+    thumbnailSummary:
+      "Multilingual job matching platform connecting international students with Australian businesses",
+    description:
+      "A comprehensive job matching platform tailored for part-time and casual work in Australia. Designed to connect students and working holiday makers with small business owners, featuring multi-language support, real-time notifications, and advanced search capabilities.",
+    imageUrls: [
+      "/images/parttimeMate/431220789-8bab0778-2911-40c4-a90c-96a92f2abe33.png",
+      "/images/parttimeMate/431220862-c4401b88-78a7-4c71-9292-aa5070428132.png",
+      "/images/parttimeMate/431221175-e455f0ad-ab6d-4e2f-8cfd-1c64e0f399a6.png",
+      "/images/parttimeMate/431221577-4dd547fa-69dd-4536-97cb-5b7f3a4e5739.png",
+      "/images/parttimeMate/431222220-38cb7b93-e78a-4cbe-b68a-0d61f7b04950.png",
+    ],
+    githubUrl: "https://github.com/JinLee0811/partTimeMate_FE",
+    liveUrl: "",
+    date: "2024-12",
+    featured: true,
+    category: "Team Projects",
+
+    projectGoal:
+      "To create an inclusive job matching platform that bridges the gap between Australian businesses and international job seekers, focusing on part-time and casual employment opportunities.",
+    coreValue:
+      "Simplifying the job search and hiring process while breaking down language barriers in the Australian casual job market.",
+    yourRole: ["Frontend Lead", "Backend Developer", "UI/UX Designer"],
+    techInfra: ["AWS", "Docker", "Vercel", "GitHub Actions"],
+    techDbApi: ["NestJS API", "MySQL Database", "Redis Cache", "Firebase"],
+    keyFeatures: [
+      {
+        title: "Multi-language Support",
+        detail: "Comprehensive internationalization using react-i18next for global accessibility",
+      },
+      {
+        title: "Advanced Job Search",
+        detail: "Sophisticated filtering system by location, industry, and salary range",
+      },
+      {
+        title: "Real-time Notifications",
+        detail: "Instant updates for job postings and application status changes",
+      },
+      {
+        title: "Mobile-First Design",
+        detail: "Responsive interface optimized for both desktop and mobile users",
+      },
+    ],
+    architectureDesc:
+      "Built with a modern tech stack featuring React and TypeScript for the frontend, NestJS for a robust backend, and MySQL for data persistence. Implements real-time features using WebSocket and Redis for caching.",
+    architectureChoice:
+      "Chose NestJS for its TypeScript-first approach and robust architecture, React for its component reusability, and MySQL for reliable data management.",
+    challenges: [
+      {
+        problem: "Resource optimization with limited initial resources",
+        solution:
+          "Implemented progressive feature rollout and efficient resource allocation strategies",
+      },
+      {
+        problem: "Multi-language implementation complexity",
+        solution: "Developed a comprehensive i18n system with dynamic content loading",
+      },
+      {
+        problem: "Dual-audience UX design challenges",
+        solution:
+          "Created separate user flows for employers and job seekers while maintaining consistent UI",
+      },
+    ],
+    achievements: [
+      "Successfully implemented multi-language support",
+      "Developed responsive design for all devices",
+      "Created efficient job matching algorithm",
+      "Established real-time notification system",
+    ],
+    collaboration: [
+      "Led frontend development team",
+      "Coordinated with backend developers",
+      "Managed UI/UX implementation",
+      "Facilitated cross-team communication",
+    ],
+    testing: [
+      "Comprehensive unit and integration testing",
+      "Multi-language functionality testing",
+      "Cross-browser compatibility testing",
+      "Performance optimization and monitoring",
+    ],
+    deployment: [
+      "Implemented CI/CD pipeline with GitHub Actions",
+      "Set up containerized deployment with Docker",
+      "Configured cloud infrastructure on AWS",
+      "Established monitoring and logging systems",
+    ],
+    lessonsLearned: [
+      "Importance of scalable architecture in job platforms",
+      "Value of comprehensive internationalization planning",
+      "Benefits of user-centric design approach",
+      "Significance of real-time feature optimization",
+    ],
+  },
+  {
+    title: "Modern Portfolio Website (Freelance)",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Figma"],
+    thumbnailSummary: "Minimalist portfolio website with elegant animations and responsive design",
+    description:
+      "A sleek, modern portfolio website developed for a freelance client. Built with Next.js and TypeScript, featuring a minimalist design that emphasizes content and user experience. The project showcases the perfect balance between aesthetic appeal and technical performance.",
+    imageUrls: [
+      "/images/FreelanceWork/431224055-a7398c09-fceb-47c5-84a0-ad296aa085bd.png",
+      "/images/FreelanceWork/431224119-aac31550-4832-4332-b466-f73674680248.png",
+      "/images/FreelanceWork/431224186-b25900f7-e460-4c9c-a890-03c1c53595f3.png",
+      "/images/FreelanceWork/431224281-cc385cc0-1583-4706-b83d-917da25c7471.png",
+    ],
+    githubUrl: "",
+    liveUrl: "https://chaebin.vercel.app/",
+    date: "2024-11",
+    featured: false,
+    category: "Personal",
+
+    projectGoal:
+      "To create a distinctive, high-performance portfolio website that effectively showcases the client's work while maintaining optimal user experience across all devices.",
+    coreValue:
+      "Combining minimalist design principles with modern web technologies to create a memorable and efficient online presence.",
+    yourRole: ["Lead Developer", "UI/UX Designer", "Performance Optimizer"],
+    techInfra: ["Vercel", "Git", "Cloudinary"],
+    techDbApi: ["Next.js API Routes", "Image Optimization API", "Analytics API"],
+    keyFeatures: [
+      {
+        title: "Responsive Design",
+        detail: "Pixel-perfect layouts across all device sizes with mobile-first approach",
+      },
+      {
+        title: "Performance Optimization",
+        detail: "Optimized core web vitals and lighthouse scores for optimal user experience",
+      },
+      {
+        title: "Custom UI Components",
+        detail: "Bespoke design components created and implemented from Figma mockups",
+      },
+      {
+        title: "SEO Enhancement",
+        detail: "Implemented modern SEO practices for better search engine visibility",
+      },
+    ],
+    architectureDesc:
+      "Leverages Next.js 14's app router and server components for optimal performance. Implements a serverless architecture with static generation where possible, and server-side rendering for dynamic content.",
+    architectureChoice:
+      "Selected Next.js for its superior performance and SEO capabilities, combined with Tailwind CSS for rapid, consistent styling and TypeScript for code reliability.",
+    challenges: [
+      {
+        problem: "Iterative design process with client feedback",
+        solution:
+          "Established clear communication channels and implemented systematic feedback incorporation process",
+      },
+      {
+        problem: "Cross-device responsiveness",
+        solution: "Developed comprehensive breakpoint system and extensive device testing protocol",
+      },
+      {
+        problem: "Design personality balance",
+        solution:
+          "Created subtle animations and micro-interactions to add character while maintaining minimalism",
+      },
+    ],
+    achievements: [
+      "Achieved perfect lighthouse scores",
+      "Implemented seamless responsive design",
+      "Created unique, memorable UI/UX",
+      "Optimized for global content delivery",
+    ],
+    collaboration: [
+      "Direct client communication and feedback integration",
+      "Regular progress updates and milestone reviews",
+      "Iterative design and development process",
+      "Post-launch support and maintenance",
+    ],
+    testing: [
+      "Cross-browser compatibility testing",
+      "Mobile responsiveness validation",
+      "Performance benchmarking",
+      "Accessibility compliance checking",
+    ],
+    deployment: [
+      "Serverless deployment on Vercel",
+      "Custom domain configuration",
+      "CDN setup for global delivery",
+      "Analytics and monitoring setup",
+    ],
+    lessonsLearned: [
+      "Importance of clear client communication",
+      "Value of iterative design process",
+      "Benefits of performance-first development",
+      "Significance of thorough device testing",
+    ],
+  },
+  {
+    title: "LUB (Let Us Build)",
+    technologies: ["React", "TypeScript", "Tailwind CSS", "Google API"],
+    description:
+      "A freelance request platform built with React and TypeScript, featuring automated email delivery of client project inquiries using Google API. The platform provides a user-friendly interface and professional design to create a reliable freelance service platform.",
+    thumbnailSummary:
+      "Streamlined freelance project request platform with automated client communication",
+    imageUrls: [
+      "/images/LUB/431225417-aceb5248-105f-4695-8843-23f36c837ff9.png",
+      "/images/LUB/431225479-773b63df-5421-4286-9aaa-7f52ef863ea2.png",
+      "/images/LUB/431225557-9d2fb9cb-dfef-443a-b8d2-255cae9620f7.png",
+      "/images/LUB/431225662-c6a5ed59-c95c-4a6b-91e5-e978d3de692c.png",
+    ],
+    githubUrl: "",
+    liveUrl: "https://lub-letusbuild.vercel.app/",
+    date: "2025-12",
+    featured: false,
+    category: "Personal",
+
+    projectGoal:
+      "To build an efficient communication platform between freelancers and clients, implementing an automated email system using Google API.",
+    coreValue:
+      "Providing a reliable freelance service platform through a user-friendly interface and secure project inquiry system.",
+    yourRole: ["Frontend Developer", "UI/UX Designer", "API Integration Specialist"],
+    techInfra: ["Vercel", "Git", "Google Cloud Platform"],
+    techDbApi: ["Google OAuth API", "Email Service API", "Form Validation API"],
+    keyFeatures: [
+      {
+        title: "프로젝트 문의 폼",
+        detail: "TypeScript를 활용한 견고한 폼 검증 및 처리 시스템 구현",
+      },
+      {
+        title: "이메일 자동화",
+        detail: "Google API를 통한 자동 이메일 전송 시스템",
+      },
+      {
+        title: "반응형 디자인",
+        detail: "Tailwind CSS를 활용한 모든 디바이스 최적화 UI",
+      },
+      {
+        title: "스팸 방지",
+        detail: "보안 강화된 폼 제출 시스템과 검증 로직",
+      },
+    ],
+    architectureDesc:
+      "React와 TypeScript를 기반으로 한 프론트엔드 아키텍처에 Google API를 통합하여 안전하고 효율적인 이메일 시스템을 구현했습니다. Tailwind CSS를 활용하여 반응형 디자인을 구현했습니다.",
+    architectureChoice:
+      "TypeScript의 타입 안정성과 React의 컴포넌트 기반 아키텍처를 선택하여 견고한 애플리케이션을 구축했으며, Google API를 활용하여 안정적인 이메일 시스템을 구현했습니다.",
+    challenges: [
+      {
+        problem: "Google OAuth 설정 및 보안",
+        solution: "철저한 보안 설정과 환경 변수 관리를 통한 안전한 API 통합 구현",
+      },
+      {
+        problem: "스팸 방지와 폼 보안",
+        solution: "다중 검증 단계와 reCAPTCHA 통합으로 보안 강화",
+      },
+      {
+        problem: "전문성과 신뢰성 있는 디자인",
+        solution: "사용자 경험 연구를 통한 전문적이고 신뢰감 있는 UI/UX 디자인 구현",
+      },
+    ],
+    achievements: [
+      "안전하고 효율적인 프로젝트 문의 시스템 구축",
+      "Google API를 활용한 자동화된 이메일 시스템 구현",
+      "반응형 디자인으로 모든 디바이스 지원",
+      "사용자 친화적인 UI/UX 구현",
+    ],
+    collaboration: [
+      "독립 프로젝트 진행",
+      "Google API 문서 활용",
+      "사용자 피드백 수집 및 반영",
+      "지속적인 성능 최적화",
+    ],
+    testing: [
+      "폼 검증 시스템 테스트",
+      "이메일 전송 시스템 테스트",
+      "크로스 브라우저 호환성 검증",
+      "보안 취약점 테스트",
+    ],
+    deployment: [
+      "Vercel을 통한 배포",
+      "지속적 통합/배포 파이프라인 구축",
+      "성능 모니터링 시스템 구축",
+      "보안 설정 최적화",
+    ],
+    lessonsLearned: [
+      "Google API 통합의 복잡성 이해",
+      "폼 보안의 중요성 인식",
+      "사용자 신뢰 구축을 위한 UI/UX의 역할",
+      "지속적인 성능 최적화의 필요성",
+    ],
+  },
+  {
+    title: "AI Platform",
+    technologies: ["React", "TypeScript", "Tailwind CSS", "Next.js", "Prisma", "Stripe"],
+    description:
+      "A SaaS platform with AI integration, featuring subscription management, AI model integration, and payment systems. Built with Next.js and Prisma to create a modern and scalable architecture.",
+    thumbnailSummary: "AI-powered SaaS platform with subscription and payment integration",
+    imageUrls: ["/images/AiPlatform/Ai_platform.png"],
+    githubUrl: "https://github.com/JinLee0811/Ai-platform-with-Next-js",
+    liveUrl: "",
+    date: "2024-08",
+    featured: true,
+    category: "Personal",
+
+    projectGoal:
+      "To build a SaaS platform with AI integration that provides advanced AI services to users and implement a subscription-based business model.",
+    coreValue:
+      "Combining cutting-edge AI technology with a subscription-based business model to deliver valuable services to users.",
+    yourRole: ["Full-stack Developer", "AI Integration Specialist", "System Architect"],
+    techInfra: ["Vercel", "Git", "Stripe", "Prisma"],
+    techDbApi: ["Next.js API Routes", "Prisma ORM", "Stripe API", "AI Model APIs"],
+    keyFeatures: [
+      {
+        title: "Subscription Management System",
+        detail: "Implementing a robust subscription and payment system using Stripe",
+      },
+      {
+        title: "AI Model Integration",
+        detail: "Integrating various AI models to provide advanced AI capabilities",
+      },
+      {
+        title: "User Dashboard",
+        detail: "User-friendly interface with real-time monitoring features",
+      },
+      {
+        title: "Scalable Architecture",
+        detail: "Building a modern and scalable system using Next.js and Prisma",
+      },
+    ],
+    architectureDesc:
+      "Utilizing Next.js server components and API routes to manage frontend and backend integrally, and efficiently handling database operations through Prisma. Implementing a reliable payment system through Stripe.",
+    architectureChoice:
+      "Selected Next.js server components and API routes to enhance development efficiency, and implemented type-safe database operations through Prisma.",
+    challenges: [
+      {
+        problem: "Complexity of AI model integration",
+        solution: "Flexibly integrating various AI models through a modular architecture",
+      },
+      {
+        problem: "Subscription system implementation",
+        solution: "Building a robust subscription system utilizing Stripe's powerful API",
+      },
+      {
+        problem: "Performance optimization",
+        solution: "Implementing optimal performance using Next.js server components",
+      },
+    ],
+    achievements: [
+      "Built a reliable subscription and payment system",
+      "Completed integration of various AI models",
+      "Implemented a scalable architecture",
+      "Developed a user-friendly interface",
+    ],
+    collaboration: [
+      "Independent project development",
+      "Version control through GitHub",
+      "Continuous code review",
+      "Documentation and test automation",
+    ],
+    testing: [
+      "Unit test implementation",
+      "Integration test automation",
+      "Performance testing",
+      "Security vulnerability checks",
+    ],
+    deployment: [
+      "Deployment through Vercel",
+      "CI/CD pipeline setup",
+      "Monitoring system configuration",
+      "Backup and recovery strategy establishment",
+    ],
+    lessonsLearned: [
+      "Understanding the complexity of AI service integration",
+      "Experience in implementing subscription-based business models",
+      "Importance of designing scalable architecture",
+      "Significance of payment system security",
+    ],
+  },
+  {
+    title: "Before You Go",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Supabase",
+      "Gemini API",
+      "React Query",
+      "Zustand",
+    ],
+    description:
+      "A global AI-powered travel tool that helps users discover and evaluate restaurants using AI-generated Google review summaries. By combining real user feedback, location-based search, and one-line user reviews, Before You Go helps travelers quickly decide where to eat without reading through dozens of reviews. Built with Next.js and Supabase, and powered by Gemini API for review analysis. Developed rapidly using AI assistance to accelerate the development process.",
+    thumbnailSummary: "AI-powered restaurant discovery tool for global travelers",
+    imageUrls: [
+      "/images/beforeYouGo/i1.png",
+      "/images/beforeYouGo/i2.png",
+      "/images/beforeYouGo/i3.png",
+      "/images/beforeYouGo/i4.png",
+      "/images/beforeYouGo/i5.png",
+      "/images/beforeYouGo/i6.png",
+      "/images/beforeYouGo/i7.png",
+    ],
+    githubUrl: "https://github.com/JinLee0811/BeforeYouGO",
+    liveUrl: "https://beforeyougo.vercel.app/",
+    date: "2025-04",
+    featured: true,
+    category: "Personal",
+
+    projectGoal:
+      "To simplify restaurant discovery for travelers by providing concise AI-generated summaries of Google reviews, allowing users to avoid information overload and make quick, confident dining decisions worldwide.",
+    coreValue:
+      "Delivers instant AI review summaries, language-aware insights, and a clean user experience tailored for travelers who value efficiency and accuracy while exploring food options abroad.",
+    yourRole: ["Founder", "Full-Stack Developer", "Product Designer"],
+    techInfra: ["Vercel (Deployment)", "Supabase (Auth & DB)"],
+    techDbApi: ["Supabase", "Google Places API", "Gemini (LLM API)"],
+
+    keyFeatures: [
+      {
+        title: "Location-Based Restaurant Discovery",
+        detail:
+          "Uses GPS or Google Maps Places API to find nearby restaurants based on user's location or input.",
+      },
+      {
+        title: "AI Review Summary",
+        detail:
+          "Integrates Gemini API to generate sentiment-aware summaries of real Google reviews including keywords, pros/cons, and tone.",
+      },
+      {
+        title: "Bookmark & Personal Lists",
+        detail:
+          "Authenticated users can bookmark restaurants and save them into a travel-ready list for later use.",
+      },
+      {
+        title: "One-Line Review + Rating",
+        detail:
+          "After visiting a restaurant, users can submit quick reviews and ratings which contribute to the platform's own review index.",
+      },
+    ],
+
+    architectureDesc:
+      "Built as a serverless full-stack application using Next.js for frontend and API routes, with Supabase providing authentication and data storage. Gemini API handles review summarization, and Google Maps Places API enables location-based data retrieval. Zustand and React Query manage state and async flows.",
+    architectureChoice:
+      "Next.js was selected for its hybrid rendering capabilities and API integration ease. Supabase provided a scalable, Firebase-like BaaS ideal for 1-person projects. Gemini was chosen for its lightweight LLM capabilities and Google ecosystem compatibility.",
+
+    challenges: [
+      {
+        problem: "Handling multilingual reviews and non-standard Google review formatting",
+        solution:
+          "Added language tagging and fallback logic to summarize only supported languages; future support for DeepL integration.",
+      },
+      {
+        problem: "Avoiding duplicate summaries and expensive API calls",
+        solution:
+          "Implemented caching and summary hash checks to reduce Gemini usage and prevent billing spikes.",
+      },
+    ],
+
+    achievements: [
+      "Completed working MVP and deployed live within 3 weeks.",
+      "Created a flexible, scalable architecture ready for global travel use cases.",
+      "Gathered initial user feedback and iterated rapidly on design and flow.",
+    ],
+
+    collaboration: [
+      "Solo project managed via GitHub Projects and Notion task board.",
+      "Applied CI/CD best practices using GitHub + Vercel integration.",
+      "Self-reviewed all pull requests with emphasis on readability and component reusability.",
+    ],
+
+    testing: [
+      "Manual testing on desktop and mobile across all user flows.",
+      "Used ESLint and Prettier to maintain code consistency.",
+      "Planned future integration of Cypress or Playwright for E2E testing.",
+    ],
+
+    deployment: [
+      "Deployed via Vercel with automatic GitHub sync and preview branches.",
+      "Environment variables securely configured for Google and Gemini APIs.",
+      "Supabase Auth and DB connected using project environment settings.",
+    ],
+
+    lessonsLearned: [
+      "Validated the usefulness of AI summarization in real-world travel scenarios.",
+      "Learned practical aspects of full-stack scalability using Supabase + LLM APIs.",
+      "Improved my ability to design intuitive UI/UX with minimal onboarding friction.",
+      "Gained experience integrating AI services with traditional web platforms for practical use.",
     ],
   },
 ];

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import AIChatBot from "@/components/AIChatBot";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,6 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className='flex min-h-screen px-4 sm:px-8 md:px-16 lg:px-24 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-white dark:bg-navy-dark'>
           {children}
         </div>
+        <AIChatBot />
       </body>
     </html>
   );

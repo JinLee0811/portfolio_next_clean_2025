@@ -47,4 +47,6 @@ export interface Project {
 
   // Lessons Learned
   lessonsLearned?: string[]; // Key takeaways
+
+  thumbnailSummary: string;
 }

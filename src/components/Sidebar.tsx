@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
@@ -27,7 +28,28 @@ export default function Sidebar({ isDarkMode, toggleDarkMode, activeSection }: S
       className='h-screen w-full sticky top-0 bg-white dark:bg-navy-dark flex items-center'>
       <div className='flex flex-col gap-10 lg:gap-16 px-8'>
         {/* Name and Description */}
-        <div className='space-y-4'>
+        <div className='space-y-4 group relative'>
+          {/* 호버시 나타날 프로필 이미지와 인사말 */}
+          <div className='absolute -right-12 -top-28 opacity-0 group-hover:opacity-100 transition-all duration-300 z-10'>
+            <div className='relative'>
+              {/* 인사말 말풍선 */}
+              <div className='absolute -top-10 right-34 bg-white dark:bg-navy-light px-4 py-2 rounded-full shadow-lg transform -rotate-12 border-2 border-green-400 dark:border-green-500'>
+                <span className='text-xl'>👋 Hi!</span>
+              </div>
+              {/* 프로필 이미지 */}
+              <div className='relative w-44 h-40 rounded-full overflow-hidden border-2 border-green-400 dark:border-green-500'>
+                <Image
+                  src='/images/profile/image.png'
+                  alt='Profile'
+                  fill
+                  priority
+                  quality={100}
+                  loading='eager'
+                  className='object-cover object-[0%_20%] scale-125'
+                />
+              </div>
+            </div>
+          </div>
           <h1 className='text-4xl lg:text-6xl text-slate-900 dark:text-slate-100 font-semibold tracking-tight'>
             {profile.name}
           </h1>
