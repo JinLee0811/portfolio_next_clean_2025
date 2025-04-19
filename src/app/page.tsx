@@ -94,7 +94,7 @@ export default function Home() {
         />
       </div>
 
-      <div className='w-full lg:w-1/2 min-h-screen'>
+      <div className='w-full xl:w-3/4 lg:w-3/4 min-h-screen lg:pt-36 xl:pt-24 2xl:pt-28'>
         <main className='w-full h-full'>
           {/* Hero Section */}
           <section id='about' className='min-h-screen flex flex-col justify-center'>
@@ -285,7 +285,7 @@ export default function Home() {
 
               <ProjectFilters onFilterChange={handleFilterChange} />
 
-              <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
                 {filteredProjects.map((project) => (
                   <ProjectCard key={project.title} project={project} onOpenModal={openModal} />
                 ))}

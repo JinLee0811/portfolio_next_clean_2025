@@ -14,10 +14,10 @@ interface SidebarProps {
 
 export default function Sidebar({ isDarkMode, toggleDarkMode, activeSection }: SidebarProps) {
   const navItems = [
-    { name: "About", href: "#about", section: "about" },
-    { name: "Experience", href: "#experience", section: "experience" },
-    { name: "Projects", href: "#projects", section: "projects" },
-    { name: "Contact", href: "#contact", section: "contact" },
+    { name: "About", href: "/#about", section: "about" },
+    { name: "Experience", href: "/#experience", section: "experience" },
+    { name: "Projects", href: "/#projects", section: "projects" },
+    { name: "Contact", href: "/#contact", section: "contact" },
   ];
 
   return (
@@ -52,10 +52,10 @@ export default function Sidebar({ isDarkMode, toggleDarkMode, activeSection }: S
                 <div className='flex items-center'>
                   <div
                     className={clsx(
-                      "w-8 h-[1px] mr-4 transition-all duration-300",
+                      "h-[1px] mr-4 transition-all duration-300",
                       activeSection === item.section
-                        ? "w-16 bg-green-600 dark:bg-green-400"
-                        : "bg-slate-300 dark:bg-slate-600"
+                        ? "w-24 bg-green-600 dark:bg-green-400"
+                        : "w-8 bg-slate-300 dark:bg-slate-600"
                     )}
                   />
                   <Link
