@@ -13,7 +13,6 @@ import { Project } from "../types/project";
 import clsx from "clsx";
 import Link from "next/link";
 import ChatNotification from "@/components/ChatNotification";
-import LoadingScreen from "@/components/LoadingScreen";
 
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(true);
