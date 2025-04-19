@@ -13,12 +13,15 @@ export default function ChatNotification({ isVisible, onClose }: ChatNotificatio
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
 
   useEffect(() => {
+    console.log("ChatNotification mounted");
     // Initialize audio in useEffect to ensure it's only created on client side
     setAudio(new Audio("/sounds/notification.mp3"));
   }, []);
 
   useEffect(() => {
+    console.log("isVisible changed:", isVisible);
     if (isVisible && audio) {
+      console.log("Attempting to play audio");
       // Reset audio to start and play
       audio.currentTime = 0;
       const playPromise = audio.play();

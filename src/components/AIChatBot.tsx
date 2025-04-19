@@ -29,6 +29,18 @@ export default function AIChatBot() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [audio] = useState(
+    typeof window !== "undefined" ? new Audio("/sounds/notification.mp3") : null
+  );
+
+  const playNotificationSound = () => {
+    if (audio) {
+      audio.currentTime = 0;
+      audio.play().catch((error) => {
+        console.log("Audio playback failed:", error);
+      });
+    }
+  };
 
   const handleSend = async (message: string = input.trim()) => {
     if (!message) return;
@@ -48,6 +60,7 @@ export default function AIChatBot() {
 
       const data = await response.json();
       setMessages((prev) => [...prev, { role: "assistant", content: data.response }]);
+      playNotificationSound();
     } catch (error) {
       console.error("Error:", error);
       setMessages((prev) => [

@@ -21,7 +21,7 @@ export default function Home() {
   const [selectedProject] = useState<Project | null>(null);
   const [showChatNotification, setShowChatNotification] = useState(false);
   const [hasShownNotification, setHasShownNotification] = useState(false);
-  const projectsRef = useRef<HTMLElement>(null);
+  const projectsRef = useRef<HTMLElement | null>(null);
   const [showLanding, setShowLanding] = useState(true);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isClient, setIsClient] = useState(false);
@@ -29,15 +29,18 @@ export default function Home() {
   useEffect(() => {
     setIsClient(true);
 
-    // 세션 스토리지에서 랜딩 페이지 표시 여부 확인
     const hasSeenLanding = sessionStorage.getItem("hasSeenLanding");
+    const hasShownChatNotif = sessionStorage.getItem("hasShownChatNotification");
+
     if (hasSeenLanding) {
       setShowLanding(false);
+    }
+    if (hasShownChatNotif) {
+      setHasShownNotification(true);
     }
   }, []);
 
   useEffect(() => {
-    // 초기 로드 시 다크모드 설정
     document.documentElement.classList.toggle("dark", isDarkMode);
   }, [isDarkMode]);
 
@@ -75,26 +78,31 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    if (showLanding) {
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && !hasShownNotification) {
-          setTimeout(() => {
-            setShowChatNotification(true);
-            setHasShownNotification(true);
-          }, 1000);
+        const isIntersecting = entries[0].isIntersecting;
+
+        if (isIntersecting && !hasShownNotification) {
+          setShowChatNotification(true);
+          setHasShownNotification(true);
+          sessionStorage.setItem("hasShownChatNotification", "true");
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.1, rootMargin: "0px" }
     );
 
-    if (projectsRef.current) {
-      observer.observe(projectsRef.current);
+    const projectsSection = document.getElementById("projects");
+    if (projectsSection) {
+      observer.observe(projectsSection);
     }
 
     return () => observer.disconnect();
-  }, [hasShownNotification]);
+  }, [hasShownNotification, showLanding]);
 
-  // Save scroll position before leaving the page
   useEffect(() => {
     let savedPosition = 0;
 
@@ -116,7 +124,6 @@ export default function Home() {
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("hashchange", handleHashChange);
 
-    // Check for hash in URL on initial load
     if (window.location.hash === "#projects") {
       setTimeout(() => {
         const projectsSection = document.querySelector("#projects");
@@ -132,7 +139,6 @@ export default function Home() {
     };
   }, []);
 
-  // 최신 프로젝트 4개만 선택
   const recentProjects = projects
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 4);
@@ -150,7 +156,6 @@ export default function Home() {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
         className='fixed inset-0 bg-navy-dark dark:bg-navy-darker flex items-center justify-center z-50 overflow-hidden'>
-        {/* 마우스 커서 효과 */}
         {isClient && (
           <motion.div
             className='absolute w-64 h-64 rounded-full pointer-events-none z-0'
@@ -168,7 +173,6 @@ export default function Home() {
           </motion.div>
         )}
 
-        {/* 배경 애니메이션 */}
         <motion.div
           initial={{ scale: 1.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 0.1 }}
@@ -176,9 +180,7 @@ export default function Home() {
           className='absolute inset-0 bg-gradient-to-br from-green-500/20 to-blue-500/20'
         />
 
-        {/* 메인 콘텐츠 */}
         <div className='relative z-10 text-center'>
-          {/* 로고 애니메이션 */}
           <motion.div
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
@@ -194,7 +196,6 @@ export default function Home() {
             </h1>
           </motion.div>
 
-          {/* 설명 텍스트 애니메이션 */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -204,7 +205,6 @@ export default function Home() {
             <p className='text-lg text-slate-400'>& AI Enthusiast</p>
           </motion.div>
 
-          {/* 버튼 애니메이션 */}
           <motion.button
             onClick={handleEnterPortfolio}
             className='px-8 py-3 bg-gradient-to-r from-green-500 to-blue-500 text-white rounded-lg text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300'
@@ -216,7 +216,6 @@ export default function Home() {
             Enter Portfolio
           </motion.button>
 
-          {/* 배경 파티클 효과 */}
           {isClient && (
             <motion.div
               initial={{ opacity: 0 }}
@@ -267,7 +266,6 @@ export default function Home() {
 
       <div className='w-full xl:w-3/4 lg:w-3/4 min-h-screen lg:pt-36 xl:pt-24 2xl:pt-28'>
         <main className='w-full h-full'>
-          {/* Hero Section */}
           <section id='about' className='min-h-screen flex flex-col justify-center'>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -398,7 +396,6 @@ export default function Home() {
             </motion.div>
           </section>
 
-          {/* Experience Section */}
           <section id='experience' className='min-h-screen py-24'>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -442,8 +439,7 @@ export default function Home() {
             </motion.div>
           </section>
 
-          {/* Projects Section */}
-          <section ref={projectsRef} id='projects' className='min-h-screen py-24'>
+          <section id='projects' className='min-h-screen py-24' ref={projectsRef}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -482,7 +478,6 @@ export default function Home() {
             </motion.div>
           </section>
 
-          {/* Contact Section */}
           <section id='contact' className='min-h-screen py-24 flex items-center justify-center'>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
