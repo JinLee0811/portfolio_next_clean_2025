@@ -13,6 +13,7 @@ import { Project } from "../types/project";
 import clsx from "clsx";
 import Link from "next/link";
 import ChatNotification from "@/components/ChatNotification";
+import LoadingScreen from "@/components/LoadingScreen";
 
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -22,6 +23,13 @@ export default function Home() {
   const [showChatNotification, setShowChatNotification] = useState(false);
   const [hasShownNotification, setHasShownNotification] = useState(false);
   const projectsRef = useRef<HTMLElement>(null);
+  const [showLanding, setShowLanding] = useState(true);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     // 초기 로드 시 다크모드 설정
@@ -32,6 +40,15 @@ export default function Home() {
     setIsDarkMode(!isDarkMode);
     document.documentElement.classList.toggle("dark");
   };
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,10 +89,136 @@ export default function Home() {
     return () => observer.disconnect();
   }, [hasShownNotification]);
 
+  // Save scroll position before leaving the page
+  useEffect(() => {
+    const handleScroll = () => {
+      sessionStorage.setItem("scrollPosition", window.scrollY.toString());
+    };
+
+    // Save position on scroll
+    window.addEventListener("scroll", handleScroll);
+
+    // Save position before unload
+    window.addEventListener("beforeunload", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("beforeunload", handleScroll);
+    };
+  }, []);
+
   // 최신 프로젝트 4개만 선택
   const recentProjects = projects
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 4);
+
+  if (showLanding) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+        className='fixed inset-0 bg-navy-dark dark:bg-navy-darker flex items-center justify-center z-50 overflow-hidden'>
+        {/* 마우스 커서 효과 */}
+        {isClient && (
+          <motion.div
+            className='absolute w-64 h-64 rounded-full pointer-events-none z-0'
+            animate={{
+              left: mousePosition.x - 128,
+              top: mousePosition.y - 128,
+            }}
+            transition={{
+              type: "spring",
+              damping: 30,
+              stiffness: 200,
+              mass: 0.5,
+            }}>
+            <div className='absolute inset-0 bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-full blur-3xl' />
+          </motion.div>
+        )}
+
+        {/* 배경 애니메이션 */}
+        <motion.div
+          initial={{ scale: 1.5, opacity: 0 }}
+          animate={{ scale: 1, opacity: 0.1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          className='absolute inset-0 bg-gradient-to-br from-green-500/20 to-blue-500/20'
+        />
+
+        {/* 메인 콘텐츠 */}
+        <div className='relative z-10 text-center'>
+          {/* 로고 애니메이션 */}
+          <motion.div
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 260,
+              damping: 20,
+              duration: 1.5,
+            }}
+            className='mb-8'>
+            <h1 className='text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500'>
+              Jin.Dev
+            </h1>
+          </motion.div>
+
+          {/* 설명 텍스트 애니메이션 */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className='mb-12'>
+            <p className='text-xl text-slate-300 mb-2'>Full Stack Developer</p>
+            <p className='text-lg text-slate-400'>& AI Enthusiast</p>
+          </motion.div>
+
+          {/* 버튼 애니메이션 */}
+          <motion.button
+            onClick={() => setShowLanding(false)}
+            className='px-8 py-3 bg-gradient-to-r from-green-500 to-blue-500 text-white rounded-lg text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300'
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 0.5 }}>
+            Enter Portfolio
+          </motion.button>
+
+          {/* 배경 파티클 효과 */}
+          {isClient && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 1 }}
+              className='absolute inset-0 -z-10'>
+              {[...Array(20)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className='absolute w-1 h-1 bg-white rounded-full'
+                  initial={{
+                    x: Math.random() * window.innerWidth,
+                    y: Math.random() * window.innerHeight,
+                    scale: 0,
+                  }}
+                  animate={{
+                    scale: [0, 1, 0],
+                    opacity: [0, 1, 0],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    delay: Math.random() * 2,
+                  }}
+                />
+              ))}
+            </motion.div>
+          )}
+        </div>
+      </motion.div>
+    );
+  }
 
   return (
     <div

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Project } from "../types/project";
 import Link from "next/link";
 import { ArrowUpRightIcon, CodeBracketIcon, LinkIcon } from "@heroicons/react/24/outline";
+import clsx from "clsx";
 
 interface ProjectCardProps {
   project: Project;
@@ -27,7 +28,13 @@ export default function ProjectCard({ project, isFeatured = false }: ProjectCard
                   src={project.imageUrls[0]}
                   alt={project.title}
                   fill
-                  className='object-cover group-hover:scale-105 transition-transform duration-300'
+                  priority
+                  quality={100}
+                  unoptimized={project.imageUrls[0].endsWith(".gif")}
+                  className={clsx(
+                    "object-cover group-hover:scale-105 transition-transform duration-500",
+                    "object-[0%_20%]"
+                  )}
                 />
                 <div className='absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300' />
               </>
@@ -101,7 +108,13 @@ export default function ProjectCard({ project, isFeatured = false }: ProjectCard
               src={project.imageUrls[0]}
               alt={project.title}
               fill
-              className='object-cover group-hover:scale-105 transition-transform duration-300'
+              priority
+              quality={100}
+              unoptimized={project.imageUrls[0].endsWith(".gif")}
+              className={clsx(
+                "object-cover group-hover:scale-105 transition-transform duration-500",
+                "object-center"
+              )}
             />
             <div className='absolute inset-0 bg-black/0 group-hover:bg-black/50 flex items-center justify-center transition-all duration-300'>
               <div className='opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 flex items-center text-white'>
