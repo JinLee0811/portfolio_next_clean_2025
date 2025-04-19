@@ -31,10 +31,19 @@ import { Project } from "../types/project";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+interface KeyValueItem {
+  title?: string;
+  problem?: string;
+  solution?: string;
+  detail?: string;
+  value?: string;
+  [key: string]: string | undefined;
+}
+
 interface ProjectModalProps {
   isOpen: boolean;
   closeModal: () => void;
-  project: Project | null;
+  project: Project;
 }
 
 interface ArrowProps {
@@ -119,35 +128,18 @@ export default function ProjectModal({ isOpen, closeModal, project }: ProjectMod
     );
   };
 
-  const renderKeyValueList = (items: { [key: string]: string; title?: string }[] | undefined) => {
+  const renderKeyValueList = (items: KeyValueItem[] | undefined) => {
     if (!items || items.length === 0) return null;
     return (
       <ul className='space-y-5'>
         {items.map((item, index) => {
-          let key: string | undefined = item.title;
-          if (!key) {
-            const foundKey = Object.keys(item).find(
-              (k) => k !== "detail" && k !== "solution" && k !== "title"
-            );
-            key = foundKey ? foundKey.charAt(0).toUpperCase() + foundKey.slice(1) : "Detail";
-          } else {
-            key = key.charAt(0).toUpperCase() + key.slice(1);
-          }
-
-          const value =
-            item.detail ||
-            item.solution ||
-            item[Object.keys(item).find((k) => k !== "title") || ""] ||
-            "No details provided.";
+          const title = item.title || "Detail";
+          const value = item.detail || item.solution || item.value || "No details provided";
 
           return (
-            <li key={index}>
-              <p className='font-semibold text-slate-700 dark:text-slate-300 mb-1 text-base'>
-                {key}:
-              </p>
-              <p className='text-slate-600 dark:text-slate-400 text-sm md:text-base ml-1'>
-                {value}
-              </p>
+            <li key={index} className='flex flex-col space-y-2'>
+              <h4 className='text-lg font-semibold text-slate-800 dark:text-slate-200'>{title}</h4>
+              <p className='text-slate-600 dark:text-slate-400'>{value}</p>
             </li>
           );
         })}

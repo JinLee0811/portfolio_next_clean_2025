@@ -3,26 +3,15 @@
 import { useState } from "react";
 import { projects } from "@/data/projects";
 import ProjectCard from "@/components/ProjectCard";
-import ProjectFilters from "@/components/ProjectFilters";
 import Link from "next/link";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 export default function ProjectsPage() {
-  const [activeCategory, setActiveCategory] = useState("All");
-  const [activeTech, setActiveTech] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
-  const filteredProjects = projects
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .filter((project) => {
-      if (activeCategory === "All") return true;
-      if (activeCategory === "Featured") return project.featured;
-      return project.category === activeCategory;
-    });
-
-  const handleFilterChange = (category: string, tech: string) => {
-    setActiveCategory(category);
-    setActiveTech(tech);
-  };
+  const filteredProjects = projects.filter((project) =>
+    selectedCategory === "all" ? true : project.category === selectedCategory
+  );
 
   return (
     <div className='min-h-screen py-20'>
@@ -38,7 +27,33 @@ export default function ProjectsPage() {
 
         <h1 className='text-4xl font-bold text-slate-900 dark:text-slate-100 mb-8'>All Projects</h1>
 
-        <ProjectFilters onFilterChange={handleFilterChange} />
+        <div className='flex flex-wrap gap-4 mb-8'>
+          <button
+            onClick={() => setSelectedCategory("all")}
+            className={`px-4 py-2 rounded-full ${
+              selectedCategory === "all" ? "bg-green-500 text-white" : "bg-gray-200 text-gray-700"
+            }`}>
+            All
+          </button>
+          <button
+            onClick={() => setSelectedCategory("Team Projects")}
+            className={`px-4 py-2 rounded-full ${
+              selectedCategory === "Team Projects"
+                ? "bg-green-500 text-white"
+                : "bg-gray-200 text-gray-700"
+            }`}>
+            Team Projects
+          </button>
+          <button
+            onClick={() => setSelectedCategory("Personal")}
+            className={`px-4 py-2 rounded-full ${
+              selectedCategory === "Personal"
+                ? "bg-green-500 text-white"
+                : "bg-gray-200 text-gray-700"
+            }`}>
+            Personal
+          </button>
+        </div>
 
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
           {filteredProjects.map((project) => (

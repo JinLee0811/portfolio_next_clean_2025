@@ -28,6 +28,12 @@ export default function Home() {
 
   useEffect(() => {
     setIsClient(true);
+
+    // 세션 스토리지에서 랜딩 페이지 표시 여부 확인
+    const hasSeenLanding = sessionStorage.getItem("hasSeenLanding");
+    if (hasSeenLanding) {
+      setShowLanding(false);
+    }
   }, []);
 
   useEffect(() => {
@@ -90,19 +96,39 @@ export default function Home() {
 
   // Save scroll position before leaving the page
   useEffect(() => {
+    let savedPosition = 0;
+
     const handleScroll = () => {
-      sessionStorage.setItem("scrollPosition", window.scrollY.toString());
+      savedPosition = window.scrollY;
+      sessionStorage.setItem("scrollPosition", savedPosition.toString());
     };
 
-    // Save position on scroll
-    window.addEventListener("scroll", handleScroll);
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    };
 
-    // Save position before unload
-    window.addEventListener("beforeunload", handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("hashchange", handleHashChange);
+
+    // Check for hash in URL on initial load
+    if (window.location.hash === "#projects") {
+      setTimeout(() => {
+        const projectsSection = document.querySelector("#projects");
+        if (projectsSection) {
+          projectsSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    }
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("beforeunload", handleScroll);
+      window.removeEventListener("hashchange", handleHashChange);
     };
   }, []);
 
@@ -110,6 +136,11 @@ export default function Home() {
   const recentProjects = projects
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 4);
+
+  const handleEnterPortfolio = () => {
+    setShowLanding(false);
+    sessionStorage.setItem("hasSeenLanding", "true");
+  };
 
   if (showLanding) {
     return (
@@ -175,7 +206,7 @@ export default function Home() {
 
           {/* 버튼 애니메이션 */}
           <motion.button
-            onClick={() => setShowLanding(false)}
+            onClick={handleEnterPortfolio}
             className='px-8 py-3 bg-gradient-to-r from-green-500 to-blue-500 text-white rounded-lg text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300'
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
@@ -478,11 +509,13 @@ export default function Home() {
         </main>
       </div>
 
-      <ProjectModal
-        isOpen={isModalOpen}
-        closeModal={() => setIsModalOpen(false)}
-        project={selectedProject}
-      />
+      {selectedProject && (
+        <ProjectModal
+          isOpen={isModalOpen}
+          closeModal={() => setIsModalOpen(false)}
+          project={selectedProject}
+        />
+      )}
 
       <ChatNotification
         isVisible={showChatNotification}

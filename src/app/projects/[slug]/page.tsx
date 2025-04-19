@@ -60,15 +60,6 @@ export default function ProjectPage({ params }: PageProps) {
       <article className='max-w-5xl mx-auto pt-8 pb-16 px-8'>
         {/* 헤더 섹션 */}
         <header className='mb-12'>
-          <div className='relative w-full aspect-video mb-8 rounded-xl overflow-hidden'>
-            <Image
-              src={project.thumbnail}
-              alt={project.title}
-              fill
-              className='object-cover'
-              unoptimized={project.thumbnail.endsWith(".gif")}
-            />
-          </div>
           <h1 className='text-4xl font-bold text-slate-900 dark:text-slate-100 mb-4'>
             {project.title}
           </h1>

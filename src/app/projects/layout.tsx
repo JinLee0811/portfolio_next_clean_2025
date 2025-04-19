@@ -6,7 +6,7 @@ import MouseFollower from "@/components/MouseFollower";
 
 export default function ProjectLayout({ children }: { children: React.ReactNode }) {
   const [isDarkMode, setIsDarkMode] = useState(true);
-  const [activeSection, setActiveSection] = useState("projects");
+  const activeSection = "projects";
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
