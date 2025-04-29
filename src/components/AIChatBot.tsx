@@ -90,7 +90,6 @@ export default function AIChatBot() {
           className='bg-white dark:bg-navy-light rounded-lg shadow-xl w-80 sm:w-96 h-[600px] flex flex-col'
           onWheel={(e) => {
             e.stopPropagation();
-            e.preventDefault();
           }}
           onScroll={(e) => {
             e.stopPropagation();
