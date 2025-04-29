@@ -32,7 +32,7 @@ export default function Sidebar({ isDarkMode, toggleDarkMode, activeSection }: S
         {/* Name and Description */}
         <div className='space-y-4 group relative'>
           {/* 호버시 나타날 프로필 이미지와 인사말 */}
-          <div className='absolute -right-12 -top-28 opacity-0 group-hover:opacity-100 transition-all duration-300 z-10'>
+          <div className='absolute -right-14 -top-20 opacity-0 group-hover:opacity-100 transition-all duration-300 z-10'>
             <div className='relative'>
               {/* 인사말 말풍선 */}
               <div className='absolute -top-10 right-34 bg-white dark:bg-navy-light px-4 py-2 rounded-full shadow-lg transform -rotate-12 border-2 border-green-400 dark:border-green-500'>
