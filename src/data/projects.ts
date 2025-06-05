@@ -1003,7 +1003,7 @@ export const projects: Project[] = [
     thumbnail: "/images/lub-thumb.jpg",
     githubUrl: "",
     liveUrl: "https://lub-letusbuild.vercel.app/",
-    date: "2025-12",
+    date: "2024-12",
     featured: false,
     category: "Personal",
 
@@ -1279,6 +1279,215 @@ export const projects: Project[] = [
       "Learned practical aspects of full-stack scalability using Supabase + LLM APIs.",
       "Improved my ability to design intuitive UI/UX with minimal onboarding friction.",
       "Gained experience integrating AI services with traditional web platforms for practical use.",
+    ],
+  },
+  {
+    title: "Jin.Dev Portfolio 2025 version",
+    thumbnailSummary:
+      "Modern portfolio website with AI chatbot, smooth animations, and dark mode support",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "OpenAI API", "RAG"],
+    description:
+      "A sleek and interactive developer portfolio featuring a built-in AI assistant. The chatbot leverages OpenAI's API with retrieval-augmented generation (RAG) to provide context-aware responses about the developer’s work and experience. The site includes modern animations, dark mode, and detailed project showcases.",
+    imageUrls: [
+      "/images/2025Portfolio/main.png",
+      "/images/2025Portfolio/chatbot.png",
+      "/images/2025Portfolio/projectSection.png",
+    ],
+    thumbnail: "/images/jin-dev-portfolio-thumb.jpg",
+    githubUrl: "https://github.com/JinLee0811/JinLee_Portfolio",
+    liveUrl: "https://jinleedev.vercel.app/",
+    date: "2025-05",
+    featured: true,
+    category: "Personal",
+
+    projectGoal:
+      "To create a modern, type-safe portfolio with AI-powered interactivity, enabling natural conversation with visitors and showcasing development skills.",
+    coreValue:
+      "Merges professional design with intelligent AI communication to create an engaging and futuristic portfolio experience.",
+    yourRole: ["Full-stack Developer", "AI Integrator", "UI/UX Designer"],
+    techInfra: ["Vercel", "GitHub", "LangChain", "FAISS"],
+    techDbApi: ["OpenAI API", "Custom RAG Pipeline", "Framer Motion", "System Prompt Embeddings"],
+    keyFeatures: [
+      {
+        title: "AI Chatbot Integration",
+        detail:
+          "OpenAI-powered assistant using RAG to answer questions about the portfolio and projects.",
+      },
+      {
+        title: "Modern UI/UX",
+        detail: "Smooth animations, dark mode, interactive elements, and responsive layout.",
+      },
+      {
+        title: "Project Showcase",
+        detail:
+          "Detailed modals for each project, including tech stacks, images, and live/demo links.",
+      },
+      {
+        title: "Performance Optimizations",
+        detail: "Lazy loading, image optimization, and smooth scroll memory for better UX.",
+      },
+    ],
+    architectureDesc:
+      "Built using Next.js 14 with App Router, TypeScript, and Tailwind CSS for responsive UI. The AI assistant uses OpenAI API through LangChain with FAISS-based retrieval from embedded system prompts, allowing it to serve context-aware answers in real-time.",
+    architectureChoice:
+      "Chose Next.js for hybrid rendering, Tailwind CSS for design consistency, and OpenAI + LangChain for scalable, intelligent AI interactions. The RAG-based approach improves accuracy and context relevance for chatbot responses.",
+    challenges: [
+      {
+        problem: "Maintaining fast and accurate AI responses without overusing API tokens",
+        solution:
+          "Implemented caching and FAISS vector similarity search to retrieve relevant project context before querying OpenAI.",
+      },
+      {
+        problem: "Designing intuitive conversation UX",
+        solution:
+          "Added notification sounds, typing indicators, and personalized assistant prompts to humanize the interaction.",
+      },
+      {
+        problem: "Cross-device UI consistency",
+        solution:
+          "Developed a fully responsive layout with consistent animation and navigation behavior on all devices.",
+      },
+    ],
+    achievements: [
+      "Successfully implemented OpenAI-powered chatbot with RAG-based knowledge retrieval",
+      "Designed a modern and performant portfolio UI",
+      "Created reusable and accessible component system",
+      "Improved engagement with interactive elements and natural AI conversation",
+    ],
+    collaboration: [
+      "Solo development with self-directed research on LangChain and FAISS",
+      "Used Notion and GitHub Projects for planning and tracking",
+      "Tested with peers to collect feedback on chatbot tone and UX",
+    ],
+    testing: [
+      "Manual UX testing across devices and browsers",
+      "Tested AI chatbot with edge-case inputs and fallback handling",
+      "Used Lighthouse to optimize performance and accessibility",
+    ],
+    deployment: [
+      "Deployed on Vercel with preview branches for testing",
+      "Secured OpenAI API keys and environment variables",
+      "Enabled custom domain with HTTPS and optimized image delivery",
+    ],
+    lessonsLearned: [
+      "Gained hands-on experience integrating RAG with OpenAI and LangChain",
+      "Learned best practices for building AI-first interfaces",
+      "Understood how to manage LLM performance tradeoffs",
+      "Refined responsive design principles with a component-driven approach",
+    ],
+  },
+  {
+    title: "AU-Korean Community",
+    thumbnailSummary:
+      "Community-driven platform for Koreans in Australia with honest reviews and real-life tips",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Supabase",
+      "PostgreSQL",
+      "RLS",
+    ],
+    description:
+      "AU-Community (호주 언니) is a full-stack community platform designed for Koreans living in Australia. It enables real reviews and critical discussions on migration agents, study abroad agencies, schools, and local life. The platform features a tips section, a local freeboard, a second-hand marketplace, and strict admin/moderation features. Built with Next.js 14, Supabase, and a mobile-first approach.",
+    imageUrls: [
+      "/images/hoju/main.png",
+      "/images/hoju/tip.png",
+      "/images/hoju/market.png",
+      "/images/hoju/community.png",
+      "/images/hoju/review.png",
+      "/images/hoju/login.png",
+    ],
+    thumbnail: "/images/aucommunity-thumb.jpg",
+    githubUrl: "https://github.com/JinLee0811/AUS_business_private", // (if public)
+    liveUrl: "", // 아직 배포 안된 경우 비워둠
+    date: "2025-06",
+    featured: true,
+    category: "Team Projects",
+
+    projectGoal:
+      "To build a trustworthy and user-centered community for Koreans in Australia by providing honest reviews and helpful local information.",
+    coreValue:
+      "Fosters real community conversations and transparency about migration, education, work, and life in Australia through structured reviews and open forums.",
+    yourRole: ["Full-Stack Developer", "Product Designer", "Supabase Architect"],
+    techInfra: ["Vercel", "Supabase", "GitHub", "Cursor AI"],
+    techDbApi: [
+      "Supabase PostgreSQL",
+      "RLS Policies",
+      "Supabase Auth",
+      "Realtime Triggers",
+      "Storage API",
+    ],
+    keyFeatures: [
+      {
+        title: "Honest Review System",
+        detail:
+          "Categorized reviews for agencies, schools, and shops; admin-controlled entity creation and moderation",
+      },
+      {
+        title: "Tips & Community Sections",
+        detail:
+          "User-created 꿀팁 posts with likes, comments, and nested replies; Blind-style local boards with filtering",
+      },
+      {
+        title: "Marketplace",
+        detail:
+          "Second-hand goods listings with filtering, view/like/comment counters, and inquiry through comment threads",
+      },
+      {
+        title: "Role-Based Access",
+        detail:
+          "Admin dashboard tools, RLS enforcement, and authenticated user-only content operations",
+      },
+    ],
+    architectureDesc:
+      "Built using Next.js 14 (App Router) and Supabase for backend services. PostgreSQL is used with RLS for secure data access, and triggers keep count data in sync for performance. Designed mobile-first with Tailwind CSS and includes animation with Framer Motion.",
+    architectureChoice:
+      "Supabase was selected for its Firebase-like developer experience, built-in Postgres + Auth + Storage, and powerful RLS. Next.js 14 enables hybrid rendering and fast iteration. Cursor AI was used to accelerate development.",
+    challenges: [
+      {
+        problem: "Preventing abuse in user-generated reviews",
+        solution:
+          "Locked agency/school creation to admins only and added report system with moderation tools",
+      },
+      {
+        problem: "Tracking views, likes, and comment counts in real-time",
+        solution:
+          "Implemented PostgreSQL triggers and log tables to update counters efficiently and accurately",
+      },
+      {
+        problem: "Managing different content types and user flows",
+        solution:
+          "Established consistent table schemas and modular frontend components for each content domain",
+      },
+    ],
+    achievements: [
+      "Designed and implemented multi-section platform with secure role-based access",
+      "Built nested comment system and dynamic post tagging (e.g., Best)",
+      "Implemented database triggers for scalable count tracking",
+      "Established scalable architecture for eventual mobile extension and AI summarization",
+    ],
+    collaboration: [
+      "Solo-led development with clear content and schema planning",
+      "Used Cursor AI for rapid code generation and refactoring",
+      "Planned future mobile app using shared Supabase backend",
+    ],
+    testing: [
+      "Manual testing for posting flows and RLS edge cases",
+      "Cross-device responsiveness validation",
+      "Postgres logic and trigger simulation in test environment",
+    ],
+    deployment: [
+      "Currently hosted via Vercel with Supabase backend",
+      "Environment-secure keys for auth and storage access",
+      "Planned domain setup for production launch",
+    ],
+    lessonsLearned: [
+      "Importance of RLS and Supabase trigger-based logic in community apps",
+      "Value of component reuse in multi-section platforms",
+      "Scalability planning for future AI and mobile integration",
+      "Need for strict admin controls in UGC-based platforms",
     ],
   },
 ];

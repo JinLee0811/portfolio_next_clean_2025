@@ -21,7 +21,7 @@ export default function ProjectCard({ project, isFeatured = false }: ProjectCard
         className='group relative block rounded-xl bg-slate-50 dark:bg-navy-light hover:bg-white dark:hover:bg-navy-lighter transition-all duration-300 overflow-hidden hover:shadow-lg hover:-translate-y-1'>
         <div className='flex gap-6 p-6'>
           {/* Project Image */}
-          <div className='relative w-40 h-40 flex-shrink-0 rounded-lg overflow-hidden bg-slate-200 dark:bg-navy-dark group-hover:shadow-xl transition-all duration-300'>
+          <div className='relative w-52 h-42 flex-shrink-0 rounded-lg overflow-hidden bg-slate-200 dark:bg-navy-dark group-hover:shadow-xl transition-all duration-300'>
             {project.imageUrls && project.imageUrls.length > 0 ? (
               <>
                 <Image
@@ -33,7 +33,7 @@ export default function ProjectCard({ project, isFeatured = false }: ProjectCard
                   unoptimized={project.imageUrls[0].endsWith(".gif")}
                   className={clsx(
                     "object-cover group-hover:scale-105 transition-transform duration-500",
-                    "object-[0%_20%]"
+                    "object-[50%_50%]"
                   )}
                 />
                 <div className='absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300' />

@@ -25,7 +25,7 @@ export const profile: Profile = {
   role: "Full Stack Engineer",
   shortDescription: "focused on AI-powered applications",
   location: "Sydney",
-  email: "your.email@example.com",
+  email: "jinlee811811@gmail.com",
   introduction: {
     greeting: "Hi, my name is",
     shortBio:
@@ -43,11 +43,11 @@ export const profile: Profile = {
   socialLinks: [
     {
       platform: "GitHub",
-      url: "https://github.com/yourusername",
+      url: "https://github.com/JinLee0811",
     },
     {
       platform: "LinkedIn",
-      url: "https://linkedin.com/in/yourusername",
+      url: "https://www.linkedin.com/in/jin-lee-72b653272/",
     },
   ],
 };
