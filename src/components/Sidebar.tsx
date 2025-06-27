@@ -135,7 +135,7 @@ export default function Sidebar({ isDarkMode, toggleDarkMode, activeSection }: S
             </span>
           </a>
           <a
-            href='https://docs.google.com/document/d/1o5h5Y0Gbh_ZUaYvk1lu2MbbibV1-cwK8lp-oold-h4Q/edit?usp=sharing'
+            href='https://docs.google.com/document/d/1y-EjuDR3BiGKVG52Js1GQ-hajj9aqL9OKNeQ8jFVdvA/edit?tab=t.0'
             target='_blank'
             rel='noopener noreferrer'
             className='text-slate-500 dark:text-slate-400 hover:text-green-600 dark:hover:text-green-400 transition-colors relative group'
