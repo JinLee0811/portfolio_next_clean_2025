@@ -9,7 +9,7 @@ export interface Experience {
 
 export const experiences: Experience[] = [
   {
-    title: "Frontend Developer",
+    title: "Software Developer",
     company: "Elice",
     companyUrl: "https://elice.io",
     date: "Nov 2022 – June 2023",
