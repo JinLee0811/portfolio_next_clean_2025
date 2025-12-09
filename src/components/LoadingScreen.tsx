@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { useEffect, useState } from "react";
 
 interface LoadingScreenProps {
@@ -54,7 +54,7 @@ export default function LoadingScreen({ isFirstVisit }: LoadingScreenProps) {
     },
   };
 
-  const circleVariants = {
+  const circleVariants: Variants = {
     hidden: { scale: 0, opacity: 0 },
     visible: {
       scale: 1,
