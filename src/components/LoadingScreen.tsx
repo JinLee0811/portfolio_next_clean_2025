@@ -24,14 +24,14 @@ export default function LoadingScreen({ isFirstVisit }: LoadingScreenProps) {
     return () => clearTimeout(welcomeTimer);
   }, [isFirstVisit]);
 
-  const nameVariants = {
+  const nameVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: isFirstVisit ? 1.2 : 0.8,
-        ease: [0.22, 1, 0.36, 1],
+        ease: [0.22, 1, 0.36, 1] as const,
       },
     },
   };
