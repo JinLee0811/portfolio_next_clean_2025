@@ -1,6 +1,6 @@
 # Jin.Dev Portfolio 2.0 🚀
 
-A modern, interactive portfolio website built with Next.js 14, featuring AI integration, smooth animations, and a dark mode interface.
+A modern, interactive portfolio website built with Next.js 15, featuring AI integration, smooth animations, and a dark mode interface.
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)

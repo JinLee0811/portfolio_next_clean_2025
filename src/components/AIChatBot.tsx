@@ -12,16 +12,11 @@ interface Message {
 }
 
 const suggestedQuestions = [
-  "Can you briefly introduce yourself and your journey into software development? 🚀",
-  "What are your strongest technical skills and core tech stack? 💻",
-  "Tell me about your most impactful project and your specific role in it. 🌟",
-  "How have you applied AI in your projects, and what tools or models did you use? 🤖",
-  "What was the goal behind the 'Before You Go' project, and how did you build it? 🗺️",
-  "How do you approach learning new technologies or solving technical challenges? 📚",
-  "Have you led or worked in a team before? What was your role and how did you contribute? 👥",
-  "How do you ensure usability and performance in your applications? ⚡",
-  "What are your short-term and long-term career goals? 🎯",
-  "Why do you want to work in Sydney, and what kind of company are you looking for? 🌏",
+  "What kind of data pipelines have you built or designed? 🚰",
+  "How do you handle orchestration, retries, and monitoring in ETL? ⏱️",
+  "Which warehouses/databases and SQL patterns are you most comfortable with? 🗄️",
+  "How does your full-stack background help in data engineering work? 🔗",
+  "What tools do you use for data quality and observability? ✅",
 ];
 
 export default function AIChatBot() {
@@ -131,9 +126,9 @@ export default function AIChatBot() {
                   Note: As an AI assistant, my responses might not always be 100% accurate. For the
                   most accurate information, please contact Jin directly at{" "}
                   <a
-                    href='mailto:Jeongjin.lee@student.uts.edu.au'
+                    href='mailto:jinlee.engineer@gmail.com'
                     className='text-green-500 hover:text-green-600 underline'>
-                    Jeongjin.lee@student.uts.edu.au
+                    jinlee.engineer@gmail.com
                   </a>
                 </p>
                 <div className='grid grid-cols-1 gap-2'>

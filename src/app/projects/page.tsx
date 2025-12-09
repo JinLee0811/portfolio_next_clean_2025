@@ -9,8 +9,16 @@ import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
+  const dataProjectTitles = new Set(["AI Crop Doctor", "Data Analysis Web Service"]);
+
   const filteredProjects = projects.filter((project) =>
-    selectedCategory === "all" ? true : project.category === selectedCategory
+    selectedCategory === "all"
+      ? true
+      : selectedCategory === "data"
+        ? dataProjectTitles.has(project.title)
+        : selectedCategory === "dev"
+          ? !dataProjectTitles.has(project.title)
+          : project.category === selectedCategory
   );
 
   return (
@@ -52,6 +60,20 @@ export default function ProjectsPage() {
                 : "bg-gray-200 text-gray-700"
             }`}>
             Personal
+          </button>
+          <button
+            onClick={() => setSelectedCategory("data")}
+            className={`px-4 py-2 rounded-full ${
+              selectedCategory === "data" ? "bg-green-500 text-white" : "bg-gray-200 text-gray-700"
+            }`}>
+            Data Engineering
+          </button>
+          <button
+            onClick={() => setSelectedCategory("dev")}
+            className={`px-4 py-2 rounded-full ${
+              selectedCategory === "dev" ? "bg-green-500 text-white" : "bg-gray-200 text-gray-700"
+            }`}>
+            Full-Stack / Product
           </button>
         </div>
 

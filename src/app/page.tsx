@@ -7,15 +7,15 @@ import ProjectCard from "@/components/ProjectCard";
 import MouseFollower from "@/components/MouseFollower";
 import ProjectModal from "@/components/ProjectModal";
 import { projects } from "../data/projects";
-import { profile } from "../data/profile";
 import { experiences } from "../data/experience";
 import { Project } from "../types/project";
 import clsx from "clsx";
 import Link from "next/link";
 import ChatNotification from "@/components/ChatNotification";
+import { insights } from "../data/insights";
 
 export default function Home() {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProject] = useState<Project | null>(null);
@@ -60,7 +60,7 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["about", "experience", "projects", "contact"];
+      const sections = ["about", "experience", "projects", "insights"];
       const sectionElements = sections.map((id) => document.getElementById(id));
 
       const currentSection = sectionElements.reduce((acc, section) => {
@@ -111,37 +111,45 @@ export default function Home() {
       sessionStorage.setItem("scrollPosition", savedPosition.toString());
     };
 
-    const handleHashChange = () => {
+    const scrollToHash = () => {
       const hash = window.location.hash;
-      if (hash) {
-        const element = document.querySelector(hash);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
+      if (!hash) return;
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
       }
     };
 
     window.addEventListener("scroll", handleScroll);
-    window.addEventListener("hashchange", handleHashChange);
+    window.addEventListener("hashchange", scrollToHash);
 
-    if (window.location.hash === "#projects") {
-      setTimeout(() => {
-        const projectsSection = document.querySelector("#projects");
-        if (projectsSection) {
-          projectsSection.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 100);
+    if (window.location.hash) {
+      setTimeout(scrollToHash, 120);
     }
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("hashchange", handleHashChange);
+      window.removeEventListener("hashchange", scrollToHash);
     };
   }, []);
 
-  const recentProjects = projects
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 4);
+  const [projectFilter, setProjectFilter] = useState<"data" | "dev">("data");
+
+  const sortedProjects = [...projects].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+
+  const dataProjectTitles = new Set(["AI Crop Doctor", "Data Analysis Web Service"]);
+
+  const dataProjects = sortedProjects
+    .filter((project) => dataProjectTitles.has(project.title))
+    .slice(0, 2);
+
+  const devProjects = sortedProjects
+    .filter((project) => !dataProjectTitles.has(project.title))
+    .slice(0, 2);
+
+  const displayedProjects = projectFilter === "data" ? dataProjects : devProjects;
 
   const handleEnterPortfolio = () => {
     setShowLanding(false);
@@ -201,8 +209,8 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
             className='mb-12'>
-            <p className='text-xl text-slate-300 mb-2'>Full Stack Developer</p>
-            <p className='text-lg text-slate-400'>& AI Enthusiast</p>
+            <p className='text-xl text-slate-300 mb-2'>Data Engineer</p>
+            <p className='text-lg text-slate-400'>with Full-Stack Background</p>
           </motion.div>
 
           <motion.button
@@ -277,121 +285,67 @@ export default function Home() {
                 <p className='text-slate-700 dark:text-slate-300 text-base leading-relaxed group hover:bg-slate-100 dark:hover:bg-navy-light/10 p-3 rounded-lg transition-colors'>
                   I&apos;m a{" "}
                   <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                    full-stack engineer
+                    data-focused engineer
                   </span>{" "}
-                  based in Sydney with a passion for building{" "}
+                  based in Sydney, combining a{" "}
                   <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                    intuitive, AI-powered digital products
-                  </span>
-                  . I specialize in{" "}
-                  <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                    React, TypeScript, and scalable frontend architecture
-                  </span>
-                  , with hands-on experience integrating{" "}
-                  <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                    APIs, cloud infrastructure, and machine learning models
+                    full-stack foundation
                   </span>{" "}
-                  into real-world applications.
+                  with a growing passion for building reliable data pipelines and scalable backend
+                  systems. I&apos;m aiming for junior data engineer roles where I can apply that
+                  full-stack background to make data flows dependable.
+                </p>
+                <p className='text-slate-700 dark:text-slate-300 text-base leading-relaxed group hover:bg-slate-100 dark:hover:bg-navy-light/10 p-3 rounded-lg transition-colors'>
+                  With experience across{" "}
+                  <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                    React, TypeScript, Node.js, Python, SQL, and cloud architectures
+                  </span>
+                  , I enjoy working end-to-end, from the features users interact with to the{" "}
+                  <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                    data flows
+                  </span>{" "}
+                  that quietly keep everything running.
                 </p>
 
-                {profile.introduction.detailedBio.map((paragraph, index) => (
-                  <p
-                    key={index}
-                    className='text-slate-700 dark:text-slate-300 text-base leading-relaxed group hover:bg-slate-100 dark:hover:bg-navy-light/10 p-3 rounded-lg transition-colors'>
-                    {index === 0 && (
-                      <>
-                        Currently, I lead the{" "}
-                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                          frontend development
-                        </span>{" "}
-                        of a{" "}
-                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                          part-time job marketplace
-                        </span>{" "}
-                        tailored for{" "}
-                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                          international students
-                        </span>{" "}
-                        in Australia, and an{" "}
-                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                          AI-based restaurant review summarizer
-                        </span>{" "}
-                        built for{" "}
-                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                          global travelers
-                        </span>
-                        . These projects reflect my ability to{" "}
-                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                          design, build, and ship complete products
-                        </span>{" "}
-                        from{" "}
-                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                          idea to deployment
-                        </span>{" "}
-                        —{" "}
-                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                          independently or in small teams
-                        </span>
-                      </>
-                    )}
-                    {index === 1 && (
-                      <>
-                        Previously, I worked as a developer in Korea while pursuing my{" "}
-                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                          Master&apos;s in IT at UTS
-                        </span>
-                        , where I earned{" "}
-                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                          distinction-level results
-                        </span>{" "}
-                        across{" "}
-                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                          AI and software engineering
-                        </span>{" "}
-                        coursework. I enjoy{" "}
-                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                          experimenting with new ideas
-                        </span>{" "}
-                        in my spare time — whether it&apos;s{" "}
-                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                          prototyping microservices
-                        </span>
-                        ,{" "}
-                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                          deploying ML APIs
-                        </span>
-                        , or{" "}
-                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                          designing product interfaces
-                        </span>{" "}
-                        with{" "}
-                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                          Tailwind and Figma
-                        </span>
-                      </>
-                    )}
-                    {index === 2 && (
-                      <>
-                        I&apos;m driven by{" "}
-                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                          curiosity, practicality
-                        </span>
-                        , and the{" "}
-                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                          excitement
-                        </span>{" "}
-                        of turning ideas into{" "}
-                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                          polished, user-focused experiences
-                        </span>{" "}
-                        — especially when those ideas can{" "}
-                        <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                          scale
-                        </span>
-                      </>
-                    )}
-                  </p>
-                ))}
+                <p className='text-slate-700 dark:text-slate-300 text-base leading-relaxed group hover:bg-slate-100 dark:hover:bg-navy-light/10 p-3 rounded-lg transition-colors'>
+                  These days, my work revolves around{" "}
+                  <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                    API-driven ETL pipelines, Airflow automation, and analytics-ready data modeling
+                  </span>
+                  , while still having fun with frontend-leaning projects like an{" "}
+                  <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                    AI travel review summarizer
+                  </span>{" "}
+                  and a{" "}
+                  <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                    portfolio RAG chatbot
+                  </span>
+                  . This mix lets me bridge product engineering and data engineering, creating
+                  systems that feel smooth on the surface and solid underneath.
+                </p>
+
+                <p className='text-slate-700 dark:text-slate-300 text-base leading-relaxed group hover:bg-slate-100 dark:hover:bg-navy-light/10 p-3 rounded-lg transition-colors'>
+                  I completed my{" "}
+                  <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                    Master of IT at UTS with Dean&apos;s List recognition
+                  </span>
+                  , and before moving to Sydney, I worked as a developer in Korea. In my spare time,
+                  you&apos;ll usually find me learning a new language, watching yet another
+                  development course, or trying to become the kind of engineer who won&apos;t be
+                  immediately replaced by AI anytime soon.
+                </p>
+
+                <p className='text-slate-700 dark:text-slate-300 text-base leading-relaxed group hover:bg-slate-100 dark:hover:bg-navy-light/10 p-3 rounded-lg transition-colors'>
+                  I&apos;m driven by{" "}
+                  <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                    clarity, reliability
+                  </span>
+                  , and the satisfaction of turning ideas into{" "}
+                  <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                    systems that scale
+                  </span>{" "}
+                  for both users and for data.
+                </p>
               </div>
             </motion.div>
           </section>
@@ -450,8 +404,27 @@ export default function Home() {
                 03. Featured Projects
               </h2>
 
+              <div className='flex flex-wrap gap-3 mb-6'>
+                {[
+                  { key: "data", label: "Data Engineering" },
+                  { key: "dev", label: "Full-Stack / Product" },
+                ].map((tab) => (
+                  <button
+                    key={tab.key}
+                    onClick={() => setProjectFilter(tab.key as "data" | "dev")}
+                    className={clsx(
+                      "px-4 py-2 rounded-lg border transition-colors text-sm font-medium",
+                      projectFilter === tab.key
+                        ? "border-green-600 text-green-600 dark:border-green-400 dark:text-green-400 bg-green-50 dark:bg-green-400/10"
+                        : "border-slate-200 text-slate-600 hover:border-green-600 hover:text-green-600 dark:border-slate-700 dark:text-slate-300 dark:hover:border-green-400 dark:hover:text-green-400"
+                    )}>
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+
               <div className='space-y-6'>
-                {recentProjects.map((project) => (
+                {displayedProjects.map((project) => (
                   <ProjectCard key={project.title} project={project} isFeatured={true} />
                 ))}
               </div>
@@ -478,27 +451,46 @@ export default function Home() {
             </motion.div>
           </section>
 
-          <section id='contact' className='min-h-screen py-24 flex items-center justify-center'>
+          <section id='insights' className='min-h-screen py-24'>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
-              className='text-center px-8'>
+              className='px-8'>
               <h2 className='font-mono text-green-600 dark:text-green-400 text-sm mb-4'>
-                04. What&apos;s Next?
+                04. Data Insights
               </h2>
-              <h3 className='text-3xl font-bold text-slate-900 dark:text-slate-100 mb-4'>
-                Get In Touch
+              <h3 className='text-3xl font-bold text-slate-900 dark:text-slate-100 mb-6'>
+                (Small findings from data)
               </h3>
-              <p className='text-slate-700 dark:text-slate-300 max-w-md mx-auto mb-8 text-base'>
-                {profile.introduction.currentWork}
-              </p>
-              <a
-                href={`mailto:${profile.email}`}
-                className='inline-block py-3 px-6 border-2 border-green-600 dark:border-green-400 text-green-600 dark:text-green-400 font-mono hover:bg-green-600/10 dark:hover:bg-green-400/10 transition-colors'>
-                Say Hello
-              </a>
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                {insights.slice(0, 4).map((item) => (
+                  <Link
+                    key={item.slug}
+                    href={`/insights/${item.slug}`}
+                    className='p-6 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-navy-light/30 shadow-sm hover:shadow-md transition-shadow block'>
+                    <div className='flex items-center gap-2 text-sm font-mono text-green-600 dark:text-green-400 mb-2'>
+                      <span>{item.emoji}</span>
+                      <span>{item.tag}</span>
+                    </div>
+                    <h4 className='text-xl font-semibold text-slate-900 dark:text-slate-100 mb-2'>
+                      {item.title}
+                    </h4>
+                    <p className='text-slate-700 dark:text-slate-300 text-base leading-relaxed'>
+                      {item.excerpt}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+
+              <div className='mt-10 flex flex-wrap gap-4 items-center'>
+                <Link
+                  href='/insights'
+                  className='inline-flex items-center justify-center px-5 py-3 border-2 border-green-600 dark:border-green-400 text-green-600 dark:text-green-400 font-mono hover:bg-green-600/10 dark:hover:bg-green-400/10 transition-colors'>
+                  View Insights
+                </Link>
+              </div>
             </motion.div>
           </section>
         </main>

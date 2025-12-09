@@ -24,7 +24,7 @@ export async function POST(req: Request) {
     let responseText = ragResponse;
     if (!responseText || responseText.trim() === "") {
       // fallback: English answer
-      responseText = `Jin Lee is a passionate full-stack and AI developer. He started coding in late 2021, is currently pursuing a Master's in IT at UTS (Sydney), is AWS DevOps Engineer certified, and has won a national AI competition.`;
+      responseText = `Jin Lee is preparing for junior Data Engineer roles, bringing a full-stack background. He focuses on API-driven ETL, orchestration, and analytics-ready modeling, and completed a Master's in IT at UTS (Sydney). Previously a developer in Korea, he enjoys building dependable data pipelines with cloud experience and still leverages his frontend/backend skills when needed.`;
     }
 
     chatHistory.push({ role: "assistant", content: responseText });
