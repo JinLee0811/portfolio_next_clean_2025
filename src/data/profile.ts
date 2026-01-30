@@ -22,18 +22,18 @@ export interface Profile {
 
 export const profile: Profile = {
   name: "Jin Lee",
-  role: "Data Engineer",
-  shortDescription: "data pipelines and cloud, with a full-stack background",
+  role: "Software Engineer",
+  shortDescription: "software engineer with a data-first mindset and full-stack background",
   location: "Sydney",
   email: "jinlee811811@gmail.com",
   introduction: {
     greeting: "Hi, my name is",
     shortBio:
-      "I'm a data-focused engineer in Sydney with a full-stack foundation. I build reliable data pipelines, analytics-ready models, and the product surfaces that sit on top of them.",
+      "I'm a software engineer in Sydney with a data-first mindset and full-stack foundation. I build reliable systems, analytics-ready pipelines, and the product surfaces that sit on top of them.",
     detailedBio: [
-      "I focus on API-driven ETL, Airflow automation, and data modeling while still shipping user-facing features when needed. This mix lets me bridge product engineering and data engineering so systems feel smooth on the surface and solid underneath.",
-      "Previously, I worked as a developer in Korea and completed my Master's in IT at UTS with Dean's List recognition. I enjoy tinkering with new stacks, improving pipelines, and keeping my full-stack skills sharp.",
-      "I'm driven by clarity, reliability, and the satisfaction of turning ideas into systems that scale for both users and data.",
+      "I build backend services, data pipelines, and user-facing features while keeping data quality and observability in mind. This mix lets me bridge product engineering and data work so systems feel smooth on the surface and solid underneath.",
+      "Previously, I worked as a developer in Korea and completed my Master's in IT at UTS with Dean's List recognition. I enjoy tinkering with new stacks, improving reliability, and keeping my full-stack skills sharp.",
+      "I'm driven by clarity, reliability, and the satisfaction of turning ideas into systems that scale for users and decisions.",
     ],
     currentWork:
       "I'm currently looking for new opportunities. Let's talk if you're interested in collaboration or hiring.",

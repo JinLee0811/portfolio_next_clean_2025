@@ -57,7 +57,7 @@ export default function Sidebar({ isDarkMode, toggleDarkMode, activeSection }: S
                       "h-[1px] mr-4 transition-all duration-300",
                       activeSection === item.section
                         ? "w-24 bg-green-600 dark:bg-green-400"
-                        : "w-8 bg-slate-300 dark:bg-slate-600"
+                        : "w-8 bg-slate-300 dark:bg-slate-600",
                     )}
                   />
                   <Link
@@ -67,7 +67,7 @@ export default function Sidebar({ isDarkMode, toggleDarkMode, activeSection }: S
                       activeSection === item.section
                         ? "text-lg text-slate-900 dark:text-slate-100"
                         : "text-sm text-slate-500 dark:text-slate-400",
-                      "group-hover:text-slate-900 dark:group-hover:text-slate-100"
+                      "group-hover:text-slate-900 dark:group-hover:text-slate-100",
                     )}>
                     {item.name}
                   </Link>
@@ -113,7 +113,7 @@ export default function Sidebar({ isDarkMode, toggleDarkMode, activeSection }: S
             </span>
           </a>
           <a
-            href='https://docs.google.com/document/d/1y-EjuDR3BiGKVG52Js1GQ-hajj9aqL9OKNeQ8jFVdvA/edit?tab=t.0'
+            href='https://docs.google.com/document/d/1kNtBOncHUM6n4OWfZKeex-dorXs-CgUPRkM03NQU9cY/edit?tab=t.0'
             target='_blank'
             rel='noopener noreferrer'
             className='text-slate-500 dark:text-slate-400 hover:text-green-600 dark:hover:text-green-400 transition-colors relative group'

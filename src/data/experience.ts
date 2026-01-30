@@ -12,7 +12,7 @@ export const experiences: Experience[] = [
     title: "Software Developer",
     company: "Elice",
     companyUrl: "https://elice.io",
-    date: "Nov 2022 – June 2023",
+    date: "Nov 2022 – June 2024",
     location: "Seoul",
     description: [
       "Mentored beginner developers and provided technical guidance in a collaborative, fast-paced dev environment.",

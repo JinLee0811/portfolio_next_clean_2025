@@ -12,11 +12,12 @@ interface Message {
 }
 
 const suggestedQuestions = [
-  "What kind of data pipelines have you built or designed? 🚰",
-  "How do you handle orchestration, retries, and monitoring in ETL? ⏱️",
-  "Which warehouses/databases and SQL patterns are you most comfortable with? 🗄️",
-  "How does your full-stack background help in data engineering work? 🔗",
-  "What tools do you use for data quality and observability? ✅",
+  "What are your strongest projects, and what was your role? 🚀",
+  "Can you walk me through one project from idea → deployment? 🧩",
+  "What kind of bugs/issues have you fixed in real products? 🐛",
+  "What backend APIs or services have you built and maintained? 🛠️",
+  "How do you approach debugging when something breaks in production? 🔎",
+  "What’s your preferred stack for building and shipping fast? ⚡",
 ];
 
 export default function AIChatBot() {
@@ -25,7 +26,7 @@ export default function AIChatBot() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [audio] = useState(
-    typeof window !== "undefined" ? new Audio("/sounds/notification.mp3") : null
+    typeof window !== "undefined" ? new Audio("/sounds/notification.mp3") : null,
   );
 
   const playNotificationSound = () => {
@@ -54,6 +55,9 @@ export default function AIChatBot() {
       });
 
       const data = await response.json();
+      if (!response.ok || !data?.response) {
+        throw new Error("Invalid chat response");
+      }
       setMessages((prev) => [...prev, { role: "assistant", content: data.response }]);
       playNotificationSound();
     } catch (error) {

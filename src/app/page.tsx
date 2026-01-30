@@ -92,7 +92,7 @@ export default function Home() {
           sessionStorage.setItem("hasShownChatNotification", "true");
         }
       },
-      { threshold: 0.1, rootMargin: "0px" }
+      { threshold: 0.1, rootMargin: "0px" },
     );
 
     const projectsSection = document.getElementById("projects");
@@ -136,7 +136,7 @@ export default function Home() {
   const [projectFilter, setProjectFilter] = useState<"data" | "dev">("data");
 
   const sortedProjects = [...projects].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
 
   const dataProjectTitles = new Set(["AI Crop Doctor", "Data Analysis Web Service"]);
@@ -209,8 +209,8 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
             className='mb-12'>
-            <p className='text-xl text-slate-300 mb-2'>Data Engineer</p>
-            <p className='text-lg text-slate-400'>with Full-Stack Background</p>
+            <p className='text-xl text-slate-300 mb-2'>Software Engineer</p>
+            <p className='text-lg text-slate-400'>Data-first, insight-driven builder</p>
           </motion.div>
 
           <motion.button
@@ -261,7 +261,7 @@ export default function Home() {
     <div
       className={clsx(
         "min-h-screen flex flex-col lg:flex-row",
-        isDarkMode ? "bg-navy-dark" : "bg-white"
+        isDarkMode ? "bg-navy-dark" : "bg-white",
       )}>
       <MouseFollower />
       <div className='w-full lg:w-1/2 min-h-screen'>
@@ -285,15 +285,14 @@ export default function Home() {
                 <p className='text-slate-700 dark:text-slate-300 text-base leading-relaxed group hover:bg-slate-100 dark:hover:bg-navy-light/10 p-3 rounded-lg transition-colors'>
                   I&apos;m a{" "}
                   <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                    data-focused engineer
+                    software engineer
                   </span>{" "}
                   based in Sydney, combining a{" "}
                   <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
                     full-stack foundation
                   </span>{" "}
-                  with a growing passion for building reliable data pipelines and scalable backend
-                  systems. I&apos;m aiming for junior data engineer roles where I can apply that
-                  full-stack background to make data flows dependable.
+                  with a data-first mindset. I love building products and care deeply about how
+                  reliable data shapes better decisions.
                 </p>
                 <p className='text-slate-700 dark:text-slate-300 text-base leading-relaxed group hover:bg-slate-100 dark:hover:bg-navy-light/10 p-3 rounded-lg transition-colors'>
                   With experience across{" "}
@@ -308,11 +307,15 @@ export default function Home() {
                 </p>
 
                 <p className='text-slate-700 dark:text-slate-300 text-base leading-relaxed group hover:bg-slate-100 dark:hover:bg-navy-light/10 p-3 rounded-lg transition-colors'>
-                  These days, my work revolves around{" "}
+                  These days, I build{" "}
                   <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                    API-driven ETL pipelines, Airflow automation, and analytics-ready data modeling
+                    backend services and product features
                   </span>
-                  , while still having fun with frontend-leaning projects like an{" "}
+                  , and I treat{" "}
+                  <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                    data quality and observability
+                  </span>{" "}
+                  as part of the product. Recent projects include an{" "}
                   <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
                     AI travel review summarizer
                   </span>{" "}
@@ -320,8 +323,8 @@ export default function Home() {
                   <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
                     portfolio RAG chatbot
                   </span>
-                  . This mix lets me bridge product engineering and data engineering, creating
-                  systems that feel smooth on the surface and solid underneath.
+                  . This mix helps me build experiences that feel great on the surface and stay
+                  dependable underneath.
                 </p>
 
                 <p className='text-slate-700 dark:text-slate-300 text-base leading-relaxed group hover:bg-slate-100 dark:hover:bg-navy-light/10 p-3 rounded-lg transition-colors'>
@@ -344,7 +347,7 @@ export default function Home() {
                   <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
                     systems that scale
                   </span>{" "}
-                  for both users and for data.
+                  for users and for better decisions.
                 </p>
               </div>
             </motion.div>
@@ -406,8 +409,8 @@ export default function Home() {
 
               <div className='flex flex-wrap gap-3 mb-6'>
                 {[
-                  { key: "data", label: "Data Engineering" },
                   { key: "dev", label: "Full-Stack / Product" },
+                  { key: "data", label: "Data Engineering" },
                 ].map((tab) => (
                   <button
                     key={tab.key}
@@ -416,7 +419,7 @@ export default function Home() {
                       "px-4 py-2 rounded-lg border transition-colors text-sm font-medium",
                       projectFilter === tab.key
                         ? "border-green-600 text-green-600 dark:border-green-400 dark:text-green-400 bg-green-50 dark:bg-green-400/10"
-                        : "border-slate-200 text-slate-600 hover:border-green-600 hover:text-green-600 dark:border-slate-700 dark:text-slate-300 dark:hover:border-green-400 dark:hover:text-green-400"
+                        : "border-slate-200 text-slate-600 hover:border-green-600 hover:text-green-600 dark:border-slate-700 dark:text-slate-300 dark:hover:border-green-400 dark:hover:text-green-400",
                     )}>
                     {tab.label}
                   </button>
