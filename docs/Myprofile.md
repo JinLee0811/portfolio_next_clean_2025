@@ -3,58 +3,67 @@
 **Name:** Jin Lee  
 **Email:** jinlee.engineer@gmail.com  
 **Location:** Sydney, NSW  
-**Work Rights:** Full work rights (no limitations)  
+**Work Rights:** Full Australian work rights (Partner Visa; no sponsorship required)  
 **Links:** Portfolio | GitHub | LinkedIn | Tech Blog
 
 ---
 
 ## Professional Summary
 
-Software Engineer with 2+ years of experience building and supporting full-stack web applications using React, Node.js, Python, SQL, and cloud infrastructure.  
-Experienced in working across frontend and backend systems, REST APIs, relational databases, and production workflows, with a strong focus on debugging, issue investigation, and system reliability.
+Full-stack Software Engineer with 3.5+ years of experience delivering production-grade web applications across frontend, backend, and cloud environments, specialising in React, TypeScript, and Node.js. AWS Certified DevOps Engineer – Professional, with hands-on experience designing scalable APIs, integrating secure payment systems, and deploying reliable services on AWS. Strong focus on performance, system reliability, and real-world user impact.
 
-I enjoy taking ownership of features end-to-end — from understanding the problem, designing a practical solution, implementing it, and iterating based on real usage.  
-Currently seeking a software engineering role in Sydney where I can contribute to production systems, support real users, and continue growing as a well-rounded full-stack engineer.
+Currently based in Sydney with full Australian work rights (Partner Visa, no sponsorship required). Proactive engineer who leverages AI-assisted development tools to accelerate delivery and continuously improve system quality.
 
 ---
 
 ## Skills Summary
 
-- **Frontend:** React, React Native, Next.js, TypeScript, Tailwind CSS, responsive UI, API integration
-- **Backend & APIs:** Node.js, Python, RESTful APIs, authentication & authorization, async workflows
-- **Databases & Data:** PostgreSQL, SQL, relational schema design, joins & indexing, data validation
-- **Data & Workflow:** batch processing, Apache Airflow (basic DAG design & scheduling), data ingestion
-- **Cloud & DevOps:** AWS (EC2, S3, RDS), Docker, GitHub Actions (basic CI/CD)
-- **AI & Automation:** OpenAI API, LangChain (used pragmatically in small product features)
-- **Tools & Ways of Working:** Git & GitHub (PRs, code reviews), VS Code, Notion, Figma, Agile workflows
+- **Frontend:** React, Next.js, TypeScript, JavaScript, Tailwind CSS
+- **Backend:** Node.js (Express, NestJS), RESTful API design, authentication (JWT, OAuth), payment integration
+- **Database:** PostgreSQL, MySQL, Supabase, schema design, query optimisation
+- **Cloud & DevOps:** AWS (S3, RDS, CloudWatch, IAM), Docker, GitHub Actions (CI/CD), infrastructure as code
+- **AI & Modern Development:** OpenAI API, RAG, prompt engineering, AI-assisted development (Cursor, Claude, Copilot)
+- **Tools:** Git, GitHub, Postman, Jira, Agile/Scrum, debugging and production monitoring
 
 ---
 
 ## Experience
 
-### Elice (EdTech Platform), Seoul
+### TPZ Studio, Seoul
 
-**Software Engineer** | Nov 2022 – June 2024
+**Software Engineer** | Dec 2022 – Nov 2023
 
-- Built and maintained internal web tools used by multiple internal teams.
-- Worked across frontend and backend components to deliver and support production features.
-- Investigated and debugged production issues by reproducing bugs and analysing logs and API behaviour.
-- Implemented fixes and collaborated with other engineers to validate and deploy changes.
-- Participated in code reviews and improved system reliability through iterative improvements and documentation.
+- Designed and implemented RESTful APIs for reservation, user, and payment systems, enabling reliable transactional workflows across multiple service domains and supporting real-time operations.
+- Integrated secure payment gateway systems, implementing validation, failure-handling, and reconciliation logic to improve transaction stability and reduce payment-related errors.
+- Designed and optimised relational database schemas using PostgreSQL, improving query performance and ensuring efficient handling of transactional data.
+- Improved system reliability by implementing structured error handling, logging, and monitoring using AWS CloudWatch, enabling faster detection and resolution of production issues.
+- Collaborated closely with frontend engineers (React) to define API contracts and ensure seamless feature delivery across client and server systems.
+- Standardised API response formats and error structures, improving debugging efficiency and reducing inconsistencies across services.
+- Managed environment configurations across local, staging, and production environments, ensuring stable and consistent deployment workflows.
 
 ### Youniv, Seoul
 
-**Senior Video Producer** | Jan 2020 – July 2022
+**Frontend Engineer** | Jan 2021 – Jul 2022
 
-- Led a content team that grew a YouTube channel from 100K to 700K subscribers.
-- Used analytics and performance data to guide content decisions and optimise growth.
-- This role strengthened my communication skills and ability to work with non-technical stakeholders.
+- Led migration from legacy Vanilla JavaScript to React, transforming a monolithic codebase into a scalable component-based architecture and significantly improving maintainability.
+- Built reusable UI components using modern React patterns (Hooks, state management), accelerating feature development and reducing duplicated code.
+- Improved frontend performance through code splitting, lazy loading, and rendering optimisation techniques, enhancing overall user experience.
+- Designed and developed an internal reservation system, automating studio and equipment booking workflows and improving operational efficiency.
+- Managed AWS-based deployment, domain configuration, and production environment for a platform serving over 700K subscribers.
+- Improved SEO and accessibility standards, increasing discoverability and enhancing user engagement across the platform.
+- Collaborated with cross-functional teams in feature planning and requirement discussions, translating business needs into scalable technical solutions.
+
+**Web Designer & Content Producer** | Jan 2020 – Jan 2021
+
+- Designed high-fidelity wireframes and interactive prototypes using Figma, contributing to the initial product direction and user experience design.
+- Led the launch of company web assets, including branding, domain setup, and initial cloud environment configuration.
+- Worked closely with developers to ensure accurate implementation of design systems and consistent UI/UX across platforms.
 
 ---
 
 ## Education
 
-**Master of Information Technology** | Feb 2024 – Dec 2025  
+**Master of Information Technology (Software Development)** | Feb 2024 – Dec 2025  
 University of Technology Sydney, Australia  
 GPA: 6.81 / 7.0 | WAM: 90.50  
 Dean’s List 2024 – 2025 (Top academic achievers in Engineering & IT faculty)
@@ -99,7 +108,7 @@ Dankook University, South Korea
 - Prioritise this document for personal profile questions.
 - If a fact is not in this document, respond with: "I do not have that information."
 - For project related questions, mention only 대표 프로젝트 names (e.g. Portfolio Chatbot, Crop Disease Detection) and say: "For details please check the Projects section on the portfolio."
-- For career questions, respond with: "About 2 years of professional software engineering experience and before that I worked as a video producer."
+- For career questions, summarise: software engineering at TPZ Studio (APIs, payments, PostgreSQL, AWS CloudWatch), frontend engineering and earlier design/content work at Youniv (React migration, platform serving 700K+ subscribers), plus Master's at UTS with Dean's List.
 
 ---
 
@@ -118,8 +127,8 @@ I used Next.js and Supabase because I wanted to understand why they are so popul
 I designed the data flow built the APIs handled async processing and deployed it myself
 
 **What kind of real issues have you worked on or fixed**  
-At my previous EdTech company I often worked on production bugs in internal tools  
-This included broken API responses frontend state issues and edge cases caused by unexpected user data  
+At TPZ Studio I worked on production issues around payment flows API contracts and database performance  
+That included validating gateway failures tracing CloudWatch logs and tightening error handling so issues were easier to detect and fix  
 My approach is always to reproduce the issue first check logs and requests then fix the root cause not just the symptom
 
 **What backend services or APIs have you built**  

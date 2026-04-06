@@ -23,22 +23,25 @@ export interface Profile {
 export const profile: Profile = {
   name: "Jin Lee",
   role: "Software Engineer",
-  shortDescription: "software engineer with a data-first mindset and full-stack background",
+  shortDescription:
+    "full-stack engineer delivering production web apps with React, TypeScript, Node.js, and AWS — AWS Certified DevOps Engineer – Professional",
   location: "Sydney",
-  email: "jinlee811811@gmail.com",
+  email: "jinlee.engineer@gmail.com",
   introduction: {
     greeting: "Hi, my name is",
     shortBio:
-      "I'm a software engineer in Sydney with a data-first mindset and full-stack foundation. I build reliable systems, analytics-ready pipelines, and the product surfaces that sit on top of them.",
+      "I'm a full-stack software engineer in Sydney with about 3.5 years of experience shipping production-grade web applications across frontend, backend, and cloud. I specialise in React, TypeScript, and Node.js, and I hold the AWS Certified DevOps Engineer – Professional certification.",
     detailedBio: [
-      "I build backend services, data pipelines, and user-facing features while keeping data quality and observability in mind. This mix lets me bridge product engineering and data work so systems feel smooth on the surface and solid underneath.",
-      "Previously, I worked as a developer in Korea and completed my Master's in IT at UTS with Dean's List recognition. I enjoy tinkering with new stacks, improving reliability, and keeping my full-stack skills sharp.",
-      "I'm driven by clarity, reliability, and the satisfaction of turning ideas into systems that scale for users and decisions.",
+      "I design scalable APIs, integrate secure payment flows, and deploy reliable services on AWS, with a strong focus on performance, observability, and real-world user impact.",
+      "I completed my Master of Information Technology (Software Development) at UTS with a WAM of 90.50 (HD) and Dean's List recognition (2024–2025). Before Sydney, I built APIs and payments systems at TPZ Studio and led a React migration and platform work at Youniv in Seoul.",
+      "I'm based in Sydney with full Australian work rights (Partner Visa — no sponsorship required). I stay proactive with modern tooling, including AI-assisted development, to ship faster without sacrificing quality.",
+      "I'm driven by clarity, reliability, and turning ideas into systems that scale for users and the teams behind them.",
     ],
     currentWork:
-      "I'm currently looking for new opportunities. Let's talk if you're interested in collaboration or hiring.",
-    previousWork: "Building web experiences that matter",
-    interests: "Passionate about accessibility and performance optimization",
+      "I'm open to roles where I can own features end-to-end and contribute to dependable production systems. Let's connect if that sounds like a fit.",
+    previousWork: "APIs, payments, and full-stack delivery",
+    interests:
+      "Performance, system reliability, and continuous learning across the stack",
   },
   socialLinks: [
     {

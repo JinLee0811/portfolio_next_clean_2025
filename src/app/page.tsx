@@ -285,57 +285,67 @@ export default function Home() {
                 <p className='text-slate-700 dark:text-slate-300 text-base leading-relaxed group hover:bg-slate-100 dark:hover:bg-navy-light/10 p-3 rounded-lg transition-colors'>
                   I&apos;m a{" "}
                   <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                    software engineer
+                    full-stack software engineer
                   </span>{" "}
-                  based in Sydney, combining a{" "}
+                  based in Sydney with about{" "}
                   <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                    full-stack foundation
+                    3.5 years
                   </span>{" "}
-                  with a data-first mindset. I love building products and care deeply about how
-                  reliable data shapes better decisions.
+                  of experience delivering production-grade web applications across frontend,
+                  backend, and cloud. I focus on{" "}
+                  <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                    React, TypeScript, and Node.js
+                  </span>
+                  , and I&apos;m an{" "}
+                  <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                    AWS Certified DevOps Engineer – Professional
+                  </span>
+                  .
                 </p>
                 <p className='text-slate-700 dark:text-slate-300 text-base leading-relaxed group hover:bg-slate-100 dark:hover:bg-navy-light/10 p-3 rounded-lg transition-colors'>
-                  With experience across{" "}
+                  I enjoy designing{" "}
                   <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                    React, TypeScript, Node.js, Python, SQL, and cloud architectures
+                    scalable APIs
                   </span>
-                  , I enjoy working end-to-end, from the features users interact with to the{" "}
+                  , integrating{" "}
                   <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                    data flows
-                  </span>{" "}
-                  that quietly keep everything running.
+                    secure payment systems
+                  </span>
+                  , and shipping reliable services on AWS—with attention to{" "}
+                  <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                    performance, observability, and real user impact
+                  </span>
+                  .
                 </p>
 
                 <p className='text-slate-700 dark:text-slate-300 text-base leading-relaxed group hover:bg-slate-100 dark:hover:bg-navy-light/10 p-3 rounded-lg transition-colors'>
-                  These days, I build{" "}
+                  Recently I&apos;ve built products such as{" "}
                   <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                    backend services and product features
-                  </span>
-                  , and I treat{" "}
-                  <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                    data quality and observability
+                    Before You Go
                   </span>{" "}
-                  as part of the product. Recent projects include an{" "}
+                  (AI restaurant review analytics) and this site&apos;s{" "}
                   <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                    AI travel review summarizer
-                  </span>{" "}
-                  and a{" "}
-                  <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                    portfolio RAG chatbot
+                    RAG-based portfolio chatbot
                   </span>
-                  . This mix helps me build experiences that feel great on the surface and stay
-                  dependable underneath.
+                  . In industry I&apos;ve shipped reservation and payment APIs at TPZ Studio and led a
+                  React migration plus platform delivery at Youniv in Seoul.
                 </p>
 
                 <p className='text-slate-700 dark:text-slate-300 text-base leading-relaxed group hover:bg-slate-100 dark:hover:bg-navy-light/10 p-3 rounded-lg transition-colors'>
                   I completed my{" "}
                   <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
-                    Master of IT at UTS with Dean&apos;s List recognition
+                    Master of IT (Software Development) at UTS
+                  </span>{" "}
+                  with a WAM of 90.50 (HD) and{" "}
+                  <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                    Dean&apos;s List (2024–2025)
                   </span>
-                  , and before moving to Sydney, I worked as a developer in Korea. In my spare time,
-                  you&apos;ll usually find me learning a new language, watching yet another
-                  development course, or trying to become the kind of engineer who won&apos;t be
-                  immediately replaced by AI anytime soon.
+                  . I have{" "}
+                  <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
+                    full Australian work rights
+                  </span>{" "}
+                  (Partner Visa; no sponsorship required). I also use AI-assisted development tools
+                  thoughtfully to move faster while keeping quality high.
                 </p>
 
                 <p className='text-slate-700 dark:text-slate-300 text-base leading-relaxed group hover:bg-slate-100 dark:hover:bg-navy-light/10 p-3 rounded-lg transition-colors'>
@@ -347,7 +357,7 @@ export default function Home() {
                   <span className='text-slate-900 group-hover:text-green-600 dark:text-slate-300 dark:group-hover:text-green-400 transition-colors'>
                     systems that scale
                   </span>{" "}
-                  for users and for better decisions.
+                  for users and the teams behind them.
                 </p>
               </div>
             </motion.div>
@@ -371,11 +381,15 @@ export default function Home() {
                         {experience.title}
                       </h3>
                       <span className='mx-2 text-slate-700 dark:text-slate-300'>@</span>
-                      <a
-                        href={experience.companyUrl}
-                        className='text-green-600 dark:text-green-400 hover:underline'>
-                        {experience.company}
-                      </a>
+                      {experience.companyUrl ? (
+                        <a
+                          href={experience.companyUrl}
+                          className='text-green-600 dark:text-green-400 hover:underline'>
+                          {experience.company}
+                        </a>
+                      ) : (
+                        <span className='text-green-600 dark:text-green-400'>{experience.company}</span>
+                      )}
                     </div>
                     <p className='font-mono text-xs text-slate-500 dark:text-slate-400 mb-4'>
                       {experience.date}
