@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='ko' className='scroll-smooth dark:bg-navy-dark'>
-      <body className={`${inter.className} dark:bg-navy-dark`}>
+    <html lang='ko' className='scroll-smooth dark:bg-navy-dark' suppressHydrationWarning>
+      <body className={`${inter.className} dark:bg-navy-dark`} suppressHydrationWarning>
         <div className='flex min-h-screen px-4 sm:px-8 md:px-16 lg:px-24 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-white dark:bg-navy-dark'>
           {children}
         </div>

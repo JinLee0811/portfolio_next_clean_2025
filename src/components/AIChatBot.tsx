@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { IoMdClose } from "react-icons/io";
 import { FaRobot } from "react-icons/fa";
 import { BiSend } from "react-icons/bi";
@@ -25,11 +25,14 @@ export default function AIChatBot() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [audio] = useState(
-    typeof window !== "undefined" ? new Audio("/sounds/notification.mp3") : null,
-  );
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    audioRef.current = new Audio("/sounds/notification.mp3");
+  }, []);
 
   const playNotificationSound = () => {
+    const audio = audioRef.current;
     if (audio) {
       audio.currentTime = 0;
       audio.play().catch((error) => {
