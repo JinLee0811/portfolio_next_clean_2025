@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS=\"${NODE_OPTIONS:+$NODE_OPTIONS }--no-webstorage\" next dev",
-    "build": "NODE_OPTIONS=\"${NODE_OPTIONS:+$NODE_OPTIONS }--no-webstorage\" next build",
-    "start": "NODE_OPTIONS=\"${NODE_OPTIONS:+$NODE_OPTIONS }--no-webstorage\" next start",
-    "lint": "NODE_OPTIONS=\"${NODE_OPTIONS:+$NODE_OPTIONS }--no-webstorage\" next lint"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "dev:node25": "node --no-webstorage ./node_modules/next/dist/bin/next dev"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.0",
